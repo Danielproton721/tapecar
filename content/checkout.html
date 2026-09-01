@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Finalizar Compra | Tapecar</title>
+  <meta name="description" content="Checkout seguro Tapecar — finalize seu pedido em 3 etapas." />
+  <meta name="theme-color" content="#FFC400" />
+  <link rel="icon" type="image/svg+xml" href="/images/icone-tapecar-vermelho.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="checkout.css" />
+
+  <!-- TikTok Pixel — base compartilhada -->
+  <script src="tiktok-pixel.js"></script>
+</head>
+<body class="cko-booting">
+  <header class="cko-header">
+    <a class="cko-brand" href="/" aria-label="Tapecar início">
+      <img src="/images/logo-tapecar-claro-vermelho.png" alt="Tapecar" width="220" height="32" />
+    </a>
+    <img class="cko-header-seal" src="/assets/badges/pagamento-100-seguro.svg" alt="Pagamento 100% seguro" width="89" height="19" />
+  </header>
+  <div class="cko-gradient-bar" data-testid="gradient-bar" aria-hidden="true"></div>
+
+  <div class="cko-urgencia" id="cko-urgencia" hidden>
+    <strong class="cko-urgencia-titulo">5% OFF no PIX + Frete Grátis</strong>
+    <p class="cko-urgencia-sub">preencha seus dados corretamente para o envio do pedido!</p>
+  </div>
+
+  <main class="cko-main" id="checkout-main">
+    <div class="cko-boot" id="checkout-loading" role="status" aria-live="polite" aria-busy="true">
+      <span class="cko-boot-spinner" data-testid="checkout-content-loader" aria-hidden="true"></span>
+      <p class="cko-boot-text">Carregando checkout...</p>
+    </div>
+
+    <div class="cko-empty" id="empty-cart" hidden>
+      <h1>Seu carrinho está vazio</h1>
+      <p>Adicione produtos na loja para continuar.</p>
+      <a class="cko-btn cko-btn-primary" href="/">Voltar à loja</a>
+    </div>
+
+    <div class="cko-layout" id="checkout-layout" hidden>
+      <nav class="cko-steps" aria-label="Etapas do checkout">
+        <button type="button" class="cko-step is-current" data-goto="1" aria-current="step">
+          <span class="cko-step-status sr-only">Etapa atual</span>
+          <span class="cko-step-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </span>
+          <span class="cko-step-label">Informações pessoais</span>
+        </button>
+        <button type="button" class="cko-step" data-goto="2" disabled>
+          <span class="cko-step-status sr-only"></span>
+          <span class="cko-step-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+          </span>
+          <span class="cko-step-label">Entrega</span>
+        </button>
+        <button type="button" class="cko-step" data-goto="3" disabled>
+          <span class="cko-step-status sr-only"></span>
+          <span class="cko-step-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+          </span>
+          <span class="cko-step-label">Pagamento</span>
+        </button>
+      </nav>
+
+      <aside class="cko-summary" aria-label="Resumo do Pedido">
+        <details class="cko-summary-mobile" id="summary-mobile">
+          <summary class="cko-summary-toggle">
+            <span class="cko-summary-toggle-text">
+              <strong class="cko-summary-kicker">RESUMO</strong>
+              <span class="cko-summary-sub">Informações da sua compra</span>
+            </span>
+            <span class="cko-summary-toggle-right">
+              <strong class="cko-summary-price" data-summary-total>R$ 0,00</strong>
+              <svg class="cko-summary-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </summary>
+          <div class="cko-summary-body">
+            <div class="cko-summary-items" id="summary-items"></div>
+            <dl class="cko-totals">
+              <div><dt>Subtotal</dt><dd data-summary-subtotal>R$ 0,00</dd></div>
+              <div data-discount-row hidden>
+                <dt>Desconto no PIX</dt>
+                <dd class="cko-discount" data-summary-discount>− R$ 0,00</dd>
+              </div>
+              <div><dt>Frete</dt><dd data-summary-shipping>A calcular</dd></div>
+              <div class="cko-total-row"><dt>Total</dt><dd data-summary-total>R$ 0,00</dd></div>
+            </dl>
+          </div>
+        </details>
+
+        <div class="cko-summary-desktop">
+          <div class="cko-summary-desktop-head">
+            <strong class="cko-summary-kicker">RESUMO</strong>
+            <p class="cko-summary-sub">Informações da sua compra</p>
+          </div>
+          <div class="cko-summary-items" id="summary-items-desktop"></div>
+          <dl class="cko-totals">
+            <div><dt>Subtotal</dt><dd data-summary-subtotal>R$ 0,00</dd></div>
+            <div data-discount-row hidden>
+              <dt>Desconto no PIX</dt>
+              <dd class="cko-discount" data-summary-discount>− R$ 0,00</dd>
+            </div>
+            <div><dt>Frete</dt><dd data-summary-shipping>A calcular</dd></div>
+            <div class="cko-total-row"><dt>Total</dt><dd data-summary-total>R$ 0,00</dd></div>
+          </dl>
+        </div>
+      </aside>
+
+      <section class="cko-form-col" aria-label="Checkout">
+        <!-- STEP 1: Identificação -->
+        <form class="cko-panel" id="step-1" data-step="1" novalidate>
+          <div class="cko-card">
+            <h2 class="cko-card-title"><span class="cko-card-num" aria-hidden="true">1</span>Identificação</h2>
+            <p class="cko-hint cko-hint-top">Utilizaremos seu e-mail para: identificar seu perfil, histórico de compra, notificação de pedidos e carrinho de compras.</p>
+
+            <div class="cko-field">
+              <label for="fullName">Nome completo</label>
+              <div class="cko-control">
+                <input id="fullName" name="fullName" type="text" autocomplete="name" placeholder="Seu nome completo" required />
+                <span class="cko-field-check" aria-hidden="true"></span>
+              </div>
+              <span class="cko-error" data-error-for="fullName"></span>
+            </div>
+
+            <div class="cko-field">
+              <label for="email">E-mail</label>
+              <div class="cko-control">
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="ex: maria@gmail.com" required />
+                <span class="cko-field-check" aria-hidden="true"></span>
+              </div>
+              <span class="cko-error" data-error-for="email"></span>
+            </div>
+
+            <div class="cko-field">
+              <label for="document">CPF</label>
+              <div class="cko-control">
+                <input id="document" name="document" type="text" inputmode="numeric" placeholder="000.000.000-00" required />
+                <span class="cko-field-check" aria-hidden="true"></span>
+              </div>
+              <span class="cko-error" data-error-for="document"></span>
+            </div>
+
+            <div class="cko-field">
+              <label for="phone">Celular / Whatsapp</label>
+              <div class="cko-control">
+                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Celular / Whatsapp" required />
+                <span class="cko-field-check" aria-hidden="true"></span>
+              </div>
+              <span class="cko-error" data-error-for="phone"></span>
+            </div>
+          </div>
+
+          <p class="cko-pix-hint">
+            <img src="/assets/card-pix.svg" alt="" width="22" height="22" />
+            <span>Você ganhou <strong>5% de desconto</strong><br>pagando com Pix</span>
+          </p>
+
+          <div class="cko-sticky-cta">
+            <button class="cko-btn cko-btn-primary cko-btn-block" type="submit">Ir para a entrega</button>
+          </div>
+        </form>
+
+        <!-- STEP 2: Entrega (endereço → frete) -->
+        <form class="cko-panel" id="step-2" data-step="2" hidden novalidate>
+          <div class="cko-card" id="address-card">
+            <h2 class="cko-card-title"><span class="cko-card-num" aria-hidden="true">2</span>Endereço para entrega</h2>
+            <p class="cko-card-sub">Agora precisamos do seu endereço para entrega.</p>
+
+            <div class="cko-field cko-field-cep">
+              <label for="zipCode">CEP</label>
+              <div class="cko-control">
+                <input id="zipCode" name="zipCode" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" required />
+                <span class="cko-field-check" aria-hidden="true"></span>
+              </div>
+              <span class="cko-hint">Preencha seu CEP para encontrar o melhor frete</span>
+              <span class="cko-error" data-error-for="zipCode"></span>
+            </div>
+
+            <div class="cko-address-details" id="address-details" hidden>
+              <div class="cko-field">
+                <label for="address">Endereço</label>
+                <div class="cko-control">
+                  <input id="address" name="address" type="text" autocomplete="street-address" placeholder="Rua, Avenida, Alameda" required />
+                  <span class="cko-field-check" aria-hidden="true"></span>
+                </div>
+                <span class="cko-error" data-error-for="address"></span>
+              </div>
+
+              <div class="cko-field-row">
+                <div class="cko-field">
+                  <label for="addressNumber">Número</label>
+                  <div class="cko-control">
+                    <input id="addressNumber" name="addressNumber" type="text" inputmode="numeric" placeholder="123" required />
+                    <span class="cko-field-check" aria-hidden="true"></span>
+                  </div>
+                  <span class="cko-error" data-error-for="addressNumber"></span>
+                </div>
+                <div class="cko-field">
+                  <label for="complement">Complemento <span class="cko-optional">(opcional)</span></label>
+                  <div class="cko-control">
+                    <input id="complement" name="complement" type="text" placeholder="Complemento (opcional)" />
+                    <span class="cko-field-check" aria-hidden="true"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cko-field">
+                <label for="neighborhood">Bairro</label>
+                <div class="cko-control">
+                  <input id="neighborhood" name="neighborhood" type="text" placeholder="Bairro" required />
+                  <span class="cko-field-check" aria-hidden="true"></span>
+                </div>
+                <span class="cko-error" data-error-for="neighborhood"></span>
+              </div>
+
+              <div class="cko-field-row">
+                <div class="cko-field">
+                  <label for="city">Cidade</label>
+                  <div class="cko-control">
+                    <input id="city" name="city" type="text" autocomplete="address-level2" placeholder="Cidade" required />
+                    <span class="cko-field-check" aria-hidden="true"></span>
+                  </div>
+                  <span class="cko-error" data-error-for="city"></span>
+                </div>
+                <div class="cko-field">
+                  <label for="state">Estado</label>
+                  <div class="cko-control">
+                    <select id="state" name="state" required>
+                      <option value="">Estado</option>
+                      <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+                      <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+                      <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+                      <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+                      <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+                      <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+                      <option>SP</option><option>SE</option><option>TO</option>
+                    </select>
+                    <span class="cko-field-check" aria-hidden="true"></span>
+                  </div>
+                  <span class="cko-error" data-error-for="state"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cko-card" id="address-summary" hidden>
+            <div class="cko-address-summary">
+              <div class="cko-address-summary-text">
+                <strong id="address-summary-line1"></strong>
+                <p class="cko-card-sub" id="address-summary-line2"></p>
+              </div>
+              <button type="button" class="cko-btn cko-btn-ghost" id="edit-address-btn">Editar</button>
+            </div>
+          </div>
+
+          <div class="cko-card" id="shipping-card" hidden>
+            <h2 class="cko-card-title"><span class="cko-card-num" aria-hidden="true">3</span>Forma de entrega</h2>
+            <p class="cko-card-sub" id="shipping-hint">Escolha uma forma de entrega:</p>
+            <div class="cko-shipping" id="shipping-options" hidden role="radiogroup" aria-label="Forma de entrega"></div>
+            <span class="cko-error" data-error-for="shipping"></span>
+          </div>
+
+          <div class="cko-sticky-cta">
+            <button class="cko-btn cko-btn-primary cko-btn-block" type="submit" id="step-2-submit">Selecionar frete</button>
+          </div>
+        </form>
+
+        <!-- STEP 3: Pagamento -->
+        <form class="cko-panel" id="step-3" data-step="3" hidden novalidate>
+          <div class="cko-card">
+            <h2 class="cko-card-title"><span class="cko-card-num" aria-hidden="true">4</span>Formas de pagamento</h2>
+            <p class="cko-card-sub">Todas as transações são seguras e criptografadas.</p>
+            <p class="cko-error cko-payment-error" id="payment-error" role="alert" hidden></p>
+
+            <div class="cko-pay-methods" role="radiogroup" aria-label="Forma de pagamento">
+              <!-- PIX first + pre-selected (Tropical Nuts / selectedPayment: Pix) -->
+              <div class="cko-pay-block is-open is-selected" data-pay-block="PIX">
+                <label class="cko-pay-option">
+                  <input type="radio" name="paymentMethod" value="PIX" checked />
+                  <img class="cko-pay-method-icon" src="/assets/card-pix.svg" width="39" height="26" alt="" />
+                  <span class="cko-pay-text">
+                    <strong class="cko-pay-title">Pix</strong>
+                  </span>
+                </label>
+                <div class="cko-pay-panel" id="pay-pix">
+                  <p class="cko-pay-confirm-sub">Ao confirmar, um código Pix será gerado para você realizar o pagamento pelo aplicativo do seu banco.</p>
+                  <p class="cko-pix-valor">
+                    Valor no pix:
+                    <strong class="cko-pix-valor-now" data-pix-total>R$ 0,00</strong>
+                    <s class="cko-pix-valor-was" data-pix-compare>R$ 0,00</s>
+                  </p>
+                  <button class="cko-btn cko-btn-primary cko-btn-block" type="submit" id="place-order">Finalizar Compra</button>
+                </div>
+              </div>
+
+              <div class="cko-pay-block" data-pay-block="CREDIT_CARD">
+                <label class="cko-pay-option cko-pay-option-card">
+                  <input type="radio" name="paymentMethod" value="CREDIT_CARD" />
+                  <span class="cko-pay-icon" aria-hidden="true">
+                    <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><rect x="0.5" y="0.5" width="17" height="13" rx="1.5" stroke="currentColor"/><path d="M1 4h16" stroke="currentColor"/><path d="M3 9h5" stroke="currentColor" stroke-linecap="round"/></svg>
+                  </span>
+                  <span class="cko-pay-text cko-pay-text-stack">
+                    <strong class="cko-pay-title cko-pay-title-nowrap">Cartão de crédito</strong>
+                    <span class="cko-card-brands" aria-label="Bandeiras aceitas">
+                      <img src="/assets/card-brands/visa.svg" alt="Visa" width="39" height="26" />
+                      <img src="/assets/card-brands/mastercard.svg" alt="Mastercard" width="39" height="26" />
+                      <img src="/assets/card-brands/elo.svg" alt="Elo" width="39" height="26" />
+                      <img src="/assets/card-brands/amex.svg" alt="American Express" width="39" height="26" />
+                      <img src="/assets/card-brands/hiper.svg" alt="Hipercard" width="39" height="26" />
+                    </span>
+                  </span>
+                </label>
+                <div class="cko-pay-panel" id="pay-card" hidden>
+                  <div class="cko-field">
+                    <label for="cardNumber">Número do Cartão</label>
+                    <div class="cko-control">
+                      <input id="cardNumber" name="cardNumber" type="text" inputmode="numeric" autocomplete="cc-number" placeholder="1234 1234 1234 1234" />
+                      <span class="cko-field-check" aria-hidden="true"></span>
+                    </div>
+                    <span class="cko-error" data-error-for="cardNumber"></span>
+                  </div>
+                  <div class="cko-field">
+                    <label for="nameOnCard">Nome impresso no cartão</label>
+                    <div class="cko-control">
+                      <input id="nameOnCard" name="nameOnCard" type="text" autocomplete="cc-name" placeholder="ex.: Maria de Almeida Cruz" />
+                      <span class="cko-field-check" aria-hidden="true"></span>
+                    </div>
+                    <span class="cko-error" data-error-for="nameOnCard"></span>
+                  </div>
+                  <div class="cko-field-row cko-field-row-desktop">
+                    <div class="cko-field">
+                      <label for="expirationDate">Validade <span class="cko-optional">(mês/ano)</span></label>
+                      <div class="cko-control">
+                        <input id="expirationDate" name="expirationDate" type="text" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/AA" />
+                        <span class="cko-field-check" aria-hidden="true"></span>
+                      </div>
+                      <span class="cko-error" data-error-for="expirationDate"></span>
+                    </div>
+                    <div class="cko-field">
+                      <label for="securityCode">Cód. de segurança</label>
+                      <div class="cko-control">
+                        <input id="securityCode" name="securityCode" type="text" inputmode="numeric" autocomplete="cc-csc" placeholder="CVV" />
+                        <span class="cko-field-check" aria-hidden="true"></span>
+                      </div>
+                      <span class="cko-error" data-error-for="securityCode"></span>
+                    </div>
+                  </div>
+                  <div class="cko-field">
+                    <label for="installments">Nº de Parcelas</label>
+                    <div class="cko-control">
+                      <select id="installments" name="installments"></select>
+                      <span class="cko-field-check" aria-hidden="true"></span>
+                    </div>
+                  </div>
+                  <p class="cko-secure-note">Seus dados estão seguros. Utilizamos criptografia de ponta a ponta.</p>
+                  <button class="cko-btn cko-btn-primary cko-btn-block" type="submit" id="place-order-card">Finalizar Compra</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </section>
+    </div>
+
+    <section class="cko-beneficios" id="cko-beneficios" aria-label="Nossos diferenciais" hidden>
+      <article class="cko-beneficio">
+        <span class="cko-beneficio-icone" aria-hidden="true">
+          <img src="/assets/icons/entrega.png" alt="" width="38" height="38" loading="lazy" />
+        </span>
+        <div class="cko-beneficio-texto">
+          <span class="cko-estrelas" aria-label="5 de 5 estrelas">★★★★★</span>
+          <h3>Entrega Ágil em Todo o Brasil</h3>
+          <p>Receba seu pedido com segurança e rapidez. Nosso prazo estimado de entrega é de 8 a 9 dias úteis.</p>
+        </div>
+      </article>
+
+      <article class="cko-beneficio">
+        <span class="cko-beneficio-icone" aria-hidden="true">
+          <img src="/assets/icons/atendimento.png" alt="" width="38" height="38" loading="lazy" />
+        </span>
+        <div class="cko-beneficio-texto">
+          <span class="cko-estrelas" aria-label="5 de 5 estrelas">★★★★★</span>
+          <h3>Atendimento Próximo e Humanizado</h3>
+          <p>Conte com nossa equipe todos os dias, das 8h às 20h, para receber um atendimento atencioso e personalizado.</p>
+        </div>
+      </article>
+
+      <article class="cko-beneficio">
+        <span class="cko-beneficio-icone" aria-hidden="true">
+          <img src="/assets/icons/email.png" alt="" width="38" height="38" loading="lazy" />
+        </span>
+        <div class="cko-beneficio-texto">
+          <span class="cko-estrelas" aria-label="5 de 5 estrelas">★★★★★</span>
+          <h3>Equipe Especializada à Sua Disposição</h3>
+          <p>Precisa de ajuda ou tem alguma dúvida? Entre em contato pelo e-mail <a href="mailto:ajuda@tapecar.shop">ajuda@tapecar.shop</a></p>
+        </div>
+      </article>
+    </section>
+
+    <div class="cko-overlay" id="processing" hidden>
+      <div class="cko-overlay-card">
+        <div class="cko-spinner" aria-hidden="true"></div>
+        <p>Aguarde, estamos finalizando sua compra. Não feche essa janela</p>
+      </div>
+    </div>
+
+    <!-- A confirmacao virou pagina propria: obrigado.html -->
+  </main>
+
+  <footer class="cko-footer">
+    <h2 class="cko-footer-title">Formas de pagamento</h2>
+
+    <div class="cko-footer-pay" aria-label="Formas de pagamento aceitas">
+      <img src="/assets/card-brands/amex.svg" alt="American Express" width="39" height="26" />
+      <img src="/assets/card-brands/visa.svg" alt="Visa" width="39" height="26" />
+      <img src="/assets/card-brands/mastercard.svg" alt="Mastercard" width="39" height="26" />
+      <img src="/assets/card-brands/elo.svg" alt="Elo" width="39" height="26" />
+      <img src="/assets/card-brands/hiper.svg" alt="Hipercard" width="39" height="26" />
+      <img src="/assets/card-pix.svg" alt="Pix" width="39" height="26" />
+    </div>
+
+    <div class="cko-footer-empresa">
+      <p class="cko-footer-nome">Tapecar</p>
+              <p>Rosário da Limeira/MG, 184</p>
+              <p>CNPJ: 97.546.944/0001-09</p>
+      <p>Email: <a href="mailto:ajuda@tapecar.shop">ajuda@tapecar.shop</a></p>
+    </div>
+
+    <nav class="cko-footer-policies" aria-label="Politicas da loja">
+      <a href="/termos-de-uso">Termos de uso</a>
+      <a href="/trocas-e-devolucoes">Trocas e devolucoes</a>
+      <a href="/politica-de-privacidade">Politica de Privacidade</a>
+      <a href="/politica-de-entrega">Politica de Entrega</a>
+    </nav>
+
+    <div class="cko-footer-selos" aria-label="Selos de seguranca">
+      <img src="/assets/badges/selo-ssl.svg" alt="Site seguro com certificado SSL" width="120" height="32" />
+      <img src="/assets/badges/selo-pagamentos.svg" alt="Pagamentos seguros" width="120" height="31" />
+    </div>
+
+    <p class="cko-footer-copy">&copy; <span id="year"></span> Tapecar</p>
+  </footer>
+
+  <script src="https://api.conta.paybeehive.com.br/v1/js" defer></script>
+  <script src="analytics.js" defer></script>
+<script src="checkout.js" defer></script>
+</body>
+</html>

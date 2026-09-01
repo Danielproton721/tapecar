@@ -1,0 +1,660 @@
+:root {
+  --pix-bg: #f7f6f3;
+  --pix-ink: #0d0d0d;
+  --pix-muted: #6b7280;
+  --pix-green: #6eb83c;
+  --pix-green-deep: #5aa32f;
+  --pix-check: #6eb83c;
+  --pix-blue: #2485f5;
+  --pix-value: #5aa32f;
+  --pix-bar-1: #0a0a0a;
+  --pix-bar-2: #c5a059;
+  --pix-font: "Rubik", system-ui, sans-serif;
+  --pix-display: "Rubik", system-ui, sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--pix-font);
+  color: var(--pix-ink);
+  background: var(--pix-bg);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* o cabecalho saiu daqui para aparecer tambem na tela de "sem pedido" */
+.pix-page {
+  background: var(--pix-bg);
+  color: var(--pix-ink);
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.pix-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4.5rem;
+  padding: 0 1rem;
+  background: #fff;
+}
+
+/* selo no canto direito sem tirar a logo do centro */
+.pix-header-seal {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  width: clamp(58px, 16vw, 76px);
+  height: auto;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .pix-header {
+    padding: 0 1.75rem;
+  }
+
+  .pix-header-seal {
+    right: 1.75rem;
+  }
+}
+
+.pix-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.75rem 1rem 2.25rem;
+  text-align: center;
+  color: #ffffff;
+  font-size: 0.82rem;
+  background: #0B0F14;
+}
+
+.pix-footer-logo {
+  width: 200px;
+  height: auto;
+  margin: 0 auto 1.25rem;
+  display: block;
+}
+
+.pix-footer-pay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 1rem;
+}
+
+.pix-footer-pay img {
+  height: 26px;
+  width: 39px;
+  object-fit: contain;
+  display: block;
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.pix-footer-security {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin: 0 0 1rem;
+}
+
+/* os selos sao SVG de traco escuro: chip branco pra continuarem legiveis */
+.pix-footer-security img {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: 110px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 6px;
+  padding: 4px 6px;
+  box-sizing: content-box;
+}
+
+.pix-footer p {
+  margin: 0 0 0.35rem;
+  color: #a3a3a3;
+}
+
+.pix-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pix-footer-policies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px 18px;
+  margin: 0.9rem auto 0.15rem;
+  max-width: 560px;
+  padding: 0 12px;
+}
+
+.pix-footer-policies a {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  border-bottom: 1px solid rgba(245, 179, 1, 0.4);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.pix-footer-policies a:hover,
+.pix-footer-policies a:focus-visible,
+.pix-footer-policies a:active {
+  color: #F5B301;
+  border-bottom-color: #F5B301;
+}
+
+.pix-footer-copy {
+  margin-top: 0.85rem !important;
+  font-size: 0.75rem;
+  color: #a3a3a3;
+}
+
+@media (max-width: 380px) {
+  .pix-footer-policies {
+    gap: 6px 14px;
+  }
+
+  .pix-footer-policies a {
+    font-size: 12px;
+  }
+}
+
+.pix-brand {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.pix-brand img {
+  width: clamp(140px, 40vw, 180px);
+  height: auto;
+  display: block;
+}
+
+.pix-gradient-bar {
+  width: 100%;
+  min-height: 4px;
+  background: var(--pix-bar-1);
+}
+
+.pix-main {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem 1rem 2.5rem;
+}
+
+.pix-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.pix-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.pix-intro h1 {
+  margin: 0 0 0.5rem;
+  width: 100%;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.pix-waiting {
+  margin: 0 0 1rem;
+  width: 100%;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.pix-timer {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #111827;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+.pix-timer-label {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.pix-card {
+  border-radius: 0.5rem;
+  background: #fff;
+  padding: 1rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.pix-card-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.pix-pay-hint {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.pix-value {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--pix-ink);
+}
+
+.pix-value span {
+  color: var(--pix-value);
+}
+
+.pix-copy-box {
+  appearance: none;
+  display: block;
+  width: 100%;
+  margin: 0.75rem 0;
+  padding: 0;
+  border: 1px solid var(--pix-green);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+}
+
+.pix-copy-input {
+  pointer-events: none;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: #fff;
+  padding: 0.625rem 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--pix-ink);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.pix-copy-action {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  background: var(--pix-green);
+  color: #fff;
+  padding: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: background 0.2s var(--ease);
+}
+
+.pix-copy-box:hover .pix-copy-action {
+  background: var(--pix-green-deep);
+}
+
+.pix-qr-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.75rem 0;
+}
+
+.pix-qr {
+  display: block;
+  width: 200px;
+  height: 200px;
+  border-radius: 0.35rem;
+  background: #fff;
+}
+
+.pix-howto {
+  margin-bottom: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  padding: 0.75rem;
+}
+
+.pix-howto-title {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--pix-ink);
+}
+
+.pix-howto-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.pix-howto-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.pix-howto-list svg {
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  color: var(--pix-check);
+}
+
+.pix-howto-list p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--pix-ink);
+  word-break: break-word;
+}
+
+.pix-toggle-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pix-or {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.pix-toggle-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--pix-blue);
+  color: #fff;
+  padding: 0.625rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: box-shadow 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.pix-toggle-btn:hover {
+  box-shadow: 0 10px 24px rgba(36, 133, 245, 0.35);
+}
+
+.pix-toggle-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(36, 133, 245, 0.3);
+}
+
+.pix-note {
+  margin: 1rem 0 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--pix-muted);
+}
+
+.pix-status-hint {
+  margin: 0.65rem 0 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--pix-muted);
+}
+
+.pix-order-num {
+  margin: 0.75rem 0 1rem;
+  font-size: 0.9rem;
+}
+
+.pix-empty {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--pix-bg);
+  padding: 1rem;
+}
+
+.pix-empty-card {
+  max-width: 28rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  background: #fff;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.pix-empty-card h2 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  color: #111827;
+}
+
+.pix-empty-card p {
+  margin: 0 0 1.5rem;
+  color: #4b5563;
+}
+
+.pix-back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .pix-main {
+    max-width: 80rem;
+    padding: 1rem 1rem 3rem;
+  }
+
+  .pix-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 7.5rem;
+    margin: 3rem 0;
+    align-items: start;
+  }
+
+  .pix-intro {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .pix-intro h1 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .pix-waiting {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .pix-timer {
+    font-size: 3rem;
+  }
+
+  .pix-timer-label {
+    font-size: 1rem;
+  }
+
+  .pix-card {
+    padding: 1.5rem 1.5rem 2rem;
+  }
+
+  .pix-card-top {
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .pix-pay-hint {
+    font-size: 0.875rem;
+  }
+
+  .pix-value {
+    font-size: 1rem;
+  }
+
+  .pix-howto {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .pix-howto-title {
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .pix-howto-list {
+    gap: 0.75rem;
+  }
+
+  .pix-howto-list p {
+    font-size: 0.875rem;
+  }
+
+  .pix-or {
+    font-size: 0.875rem;
+  }
+
+  .pix-toggle-btn {
+    padding: 0.625rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+/* ============================================================================
+   RODAPE DO PIX — alinhado ao do checkout
+   ---------------------------------------------------------------------------
+   O branch layout-wizard deixou checkout.html e obrigado.html com rodape
+   vermelho e dois selos, mas nao terminou o pix: o commit aa8abcc mexeu so 10
+   linhas de pix.html e 74 de pix.css, e o rodape ficou no #0B0F14 antigo com
+   os tres selos de confianca. A propria lista de conferencia do projeto pede
+   "pix.html e obrigado.html com a mesma fonte e o mesmo rodape", entao a fonte
+   reprova no proprio criterio. Aqui os tres ficam iguais.
+   ========================================================================== */
+.pix-footer{
+  background: #E11B22;
+  color: #ffffff;
+  border-top: 0;
+  padding: 28px 20px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.pix-footer-selos{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+/* os selos sao monocromaticos e usam currentColor: herdam o branco do rodape */
+.pix-footer-selos img{ height: 32px; width: auto; }
+
+/* As politicas herdavam rgba(255,255,255,.72), pensado para o rodape escuro
+   antigo. Sobre o vermelho isso vira 3,01:1 — reprova para texto pequeno.
+   Branco puro sobre #E11B22 da 4,80:1 e e o que o checkout ja usa. */
+.pix-footer-policies a{ color: #ffffff; }
+
+.pix-footer-policies a:hover,
+.pix-footer-policies a:focus-visible,
+.pix-footer-policies a:active{ color: #000000; }
+
+/* .pix-footer p e .pix-footer-copy estavam em #A3A3A3, cinza pensado para o
+   fundo #0B0F14 antigo. Sobre o vermelho isso da 1,90:1 — ilegivel.
+   Sao seletores descendentes (0,1,1), entao a correcao repete a mesma forma
+   e vence por ordem, como o proprio manual do projeto avisa. */
+.pix-footer p,
+.pix-footer-copy{ color: #ffffff; }
+
+.pix-footer a{ color: #ffffff; }
+
+/* bloco de identificacao da empresa — mesmo desenho do checkout */
+.pix-footer-empresa{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.pix-footer-empresa p{ margin: 0; color: inherit; }
+.pix-footer-nome{ font-weight: 700; }
+
+.pix-footer-empresa a{
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

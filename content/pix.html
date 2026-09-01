@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Pagamento Pix | Tapecar</title>
+  <meta name="description" content="Conclua seu pagamento Pix — Tapecar." />
+  <meta name="theme-color" content="#FFC400" />
+  <link rel="icon" type="image/svg+xml" href="/images/icone-tapecar-vermelho.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="pix.css" />
+
+  <!-- TikTok Pixel — base compartilhada -->
+  <script src="tiktok-pixel.js"></script>
+</head>
+<body>
+  <header class="pix-header">
+    <a class="pix-brand" href="/" aria-label="Tapecar início">
+      <img src="/images/logo-tapecar-claro-vermelho.png" alt="Tapecar" width="220" height="32" />
+    </a>
+    <img class="pix-header-seal" src="/assets/badges/pagamento-100-seguro.svg" alt="Pagamento 100% seguro" width="89" height="19" />
+  </header>
+  <div class="pix-gradient-bar" aria-hidden="true"></div>
+  <div class="pix-page" id="pix-page">
+
+    <main class="pix-main">
+      <div class="pix-grid">
+        <article class="pix-intro">
+          <h1>PIX gerado com sucesso</h1>
+          <p class="pix-waiting">
+            Estamos aguardando o pagamento! Após realizar o pagamento, aguarde nesta tela para confirmar seu pedido.
+          </p>
+          <strong class="pix-timer" id="pix-timer" aria-live="polite">30:00</strong>
+          <p class="pix-timer-label">Tempo para conclusão da operação</p>
+        </article>
+
+        <article class="pix-card-wrap">
+          <div class="pix-card">
+            <div class="pix-card-top">
+              <span class="pix-pay-hint" id="pix-pay-hint">
+                Pague através do codigo <strong>PIX Copia e Cola</strong>
+              </span>
+
+              <strong class="pix-value">
+                Valor no pix:
+                <span id="pix-amount">R$ 0,00</span>
+              </strong>
+
+              <!-- Copia e Cola mode (default on mobile) -->
+              <div id="pix-copy-mode">
+                <button type="button" class="pix-copy-box" id="copy-pix-btn" aria-label="Copiar código">
+                  <input
+                    type="text"
+                    readonly
+                    tabindex="-1"
+                    class="pix-copy-input"
+                    id="pix-code-input"
+                    value=""
+                  />
+                  <span class="pix-copy-action" id="copy-pix-label">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="2" />
+                      <path d="M4 16V6a2 2 0 0 1 2-2h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                    <span id="copy-pix-text">Copiar código</span>
+                  </span>
+                </button>
+              </div>
+
+              <!-- QR mode -->
+              <div id="pix-qr-mode" hidden>
+                <div class="pix-qr-wrap">
+                  <img id="pix-qr-img" class="pix-qr" width="200" height="200" alt="QR Code do pagamento PIX" />
+                </div>
+              </div>
+
+            </div>
+
+            <div class="pix-howto">
+              <strong class="pix-howto-title">Como pagar o seu pedido</strong>
+              <ul class="pix-howto-list" id="pix-howto-list"></ul>
+            </div>
+
+            <div class="pix-toggle-wrap">
+              <strong class="pix-or">OU</strong>
+              <button type="button" class="pix-toggle-btn" id="pix-mode-toggle">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" id="pix-toggle-icon">
+                  <rect x="4" y="4" width="6" height="6" stroke="currentColor" stroke-width="2" />
+                  <rect x="14" y="4" width="6" height="6" stroke="currentColor" stroke-width="2" />
+                  <rect x="4" y="14" width="6" height="6" stroke="currentColor" stroke-width="2" />
+                  <rect x="14" y="14" width="3" height="3" fill="currentColor" />
+                  <rect x="17" y="17" width="3" height="3" fill="currentColor" />
+                </svg>
+                <span id="pix-toggle-label">MOSTRAR QR CODE</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <p class="pix-note">
+        O QR Code expira em 30 minutos. Caso não consiga pagar dentro deste prazo, gere um novo código.
+      </p>
+      <p class="pix-status-hint" id="pix-status-hint" aria-live="polite">
+        Assim que o pagamento for confirmado, esta página atualiza automaticamente.
+      </p>
+    </main>
+  </div>
+
+  <div class="pix-empty" id="pix-empty" hidden>
+    <div class="pix-empty-card">
+      <h2>Dados do pagamento não encontrados</h2>
+      <p>Por favor, gere o PIX novamente no checkout.</p>
+      <a class="pix-back-btn" href="/checkout">Voltar ao Checkout</a>
+    </div>
+  </div>
+
+  <!-- A confirmacao virou pagina propria: obrigado.html -->
+
+  <footer class="pix-footer">
+    <img class="pix-footer-logo" src="/images/logo-tapecar-escuro-vermelho.png" alt="Tapecar" width="200" height="46" />
+    <div class="pix-footer-pay" aria-label="Formas de pagamento">
+      <img src="/assets/card-pix.svg" alt="Pix" width="39" height="26" />
+      <img src="/assets/card-brands/visa.svg" alt="Visa" width="39" height="26" />
+      <img src="/assets/card-brands/mastercard.svg" alt="Mastercard" width="39" height="26" />
+      <img src="/assets/card-brands/elo.svg" alt="Elo" width="39" height="26" />
+      <img src="/assets/card-brands/amex.svg" alt="American Express" width="39" height="26" />
+      <img src="/assets/card-brands/hiper.svg" alt="Hipercard" width="39" height="26" />
+    </div>
+    <div class="pix-footer-selos" aria-label="Selos de segurança">
+      <img src="/assets/badges/selo-ssl.svg" alt="Site seguro com certificado SSL" width="120" height="32" />
+      <img src="/assets/badges/selo-pagamentos.svg" alt="Pagamentos seguros" width="120" height="31" />
+    </div>
+    <p>Todos os direitos reservados</p>
+    <p>E-mail: <a href="mailto:ajuda@tapecar.shop">ajuda@tapecar.shop</a></p>
+    <div class="pix-footer-empresa">
+      <p class="pix-footer-nome">Tapecar</p>
+      <p>Rosário da Limeira/MG, 184</p>
+      <p>CNPJ: 97.546.944/0001-09</p>
+      <p>E-mail: <a href="mailto:ajuda@tapecar.shop">ajuda@tapecar.shop</a></p>
+    </div>
+
+    <nav class="pix-footer-policies" aria-label="Políticas da loja">
+      <a href="/politica-de-privacidade">Política de Privacidade</a>
+      <a href="/termos-de-uso">Termos de Uso</a>
+      <a href="/trocas-e-devolucoes">Trocas e Devoluções</a>
+      <a href="/politica-de-entrega">Política de Entrega</a>
+    </nav>
+    <p class="pix-footer-copy">© <span id="pix-year"></span> Tapecar</p>
+  </footer>
+
+  <script src="analytics.js" defer></script>
+<script src="pix.js" defer></script>
+</body>
+</html>

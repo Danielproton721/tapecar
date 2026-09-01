@@ -1,0 +1,301 @@
+/* =========================================================
+   TIPOGRAFIA V2 — Barlow Condensed nos títulos
+   =========================================================
+   REGRA: Barlow Condensed entra APENAS em título, preço e
+   botão. Parágrafo, label, select, FAQ, resumo do modal e
+   qualquer texto abaixo de ~16px continuam em Inter — é onde
+   mora a leitura, e o público não é jovem.
+
+   Barlow Condensed é mais estreita que Inter, então cada
+   tamanho é compensado em ~+22% para manter o mesmo peso
+   visual, e o letter-spacing negativo é zerado (condensada
+   já é apertada; tracking negativo fecharia demais).
+
+   PARA REVERTER: remova <link ...fontes.css> do <head>.
+   Nada aqui altera style.css.
+   Carregar sempre por último.
+========================================================= */
+
+:root{
+  --font-display: "Barlow Condensed", "Arial Narrow", Inter, system-ui, sans-serif;
+}
+
+/* =========================================================
+   0) CORREÇÃO DE HERANÇA — form controls
+   =========================================================
+   Por padrão do navegador, <select>, <option>, <button>,
+   <input> e <textarea> NÃO herdam font-family: usam a fonte
+   do sistema. Como o style.css nunca declarou font: inherit
+   neles, a página vinha renderizando em Arial:
+
+     · os 4 selects de marca/modelo/ano + 39 options
+     · os 9 botões do FAQ
+     · os 5 cards de cor (nome, preço e selo)
+     · o CTA fixo do mobile
+
+   Ou seja, Inter e Arial conviviam dentro do mesmo card.
+   Uma linha resolve — e é o que mais muda a percepção de
+   acabamento na página inteira.
+========================================================= */
+
+button,
+select,
+optgroup,
+option,
+input,
+textarea{
+  font-family: inherit;
+}
+
+/* =========================================================
+   1) HERO
+========================================================= */
+
+.hero.hero--premium .hero__title{
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+.hero__eyebrow,
+.hero.hero--premium .hero__eyebrow{
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+@media (min-width: 560px){
+  .hero.hero--premium .hero__title{ font-size: 48px; }
+}
+
+@media (min-width: 920px){
+  .hero.hero--premium .hero__title{ font-size: 58px; }
+}
+
+/* =========================================================
+   2) TÍTULOS DE SEÇÃO
+========================================================= */
+
+.benefits__title,
+.checks__title,
+.material__title{
+  font-family: var(--font-display);
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.14;
+}
+
+.specs__title,
+.nkit__title{
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.14;
+}
+
+.cta__title,
+.reviews__title,
+.faq__title{
+  font-family: var(--font-display);
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+
+.nxSat__title{
+  font-family: var(--font-display);
+  font-size: 29px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+
+/* título do painel de veículo */
+#widget-macena h2,
+#widget-macena .panelTitle{
+  font-family: var(--font-display);
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.14;
+}
+
+/* seções novas da V2 */
+.vPlay__title,
+.vHero__title{
+  font-family: var(--font-display);
+  font-size: clamp(27px, 6.6vw, 36px);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+
+.tapeteProduct .tpt__title{
+  font-family: var(--font-display);
+  font-size: clamp(27px, 6.6vw, 36px);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+
+.tapeteProduct .tptKit__title{
+  font-family: var(--font-display);
+  font-size: clamp(22px, 5.4vw, 27px);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.tapeteProduct .tptPanel__title{
+  font-family: var(--font-display);
+  font-size: clamp(21px, 5vw, 26px);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+/* título do modal */
+.modal__title{
+  font-family: var(--font-display);
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.14;
+}
+
+/* =========================================================
+   3) PREÇOS E NÚMEROS
+========================================================= */
+
+.cta__priceMain{
+  font-family: var(--font-display);
+  font-size: 33px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.tapeteProduct .tptPrice__main{
+  font-family: var(--font-display);
+  font-size: clamp(34px, 9.8vw, 46px);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.statCard__num{
+  font-family: var(--font-display);
+  font-size: clamp(24px, 7.6vw, 38px);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.tapeteProduct .tptKitCard__now{
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.orderTotal__value{
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.reviews__scoreText strong,
+.rscore__num{
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+/* =========================================================
+   4) BOTÕES
+   Caixa alta em condensada pede um respiro no tracking.
+========================================================= */
+
+.btn,
+.btn--primary,
+.hero.hero--premium .hero__cta,
+.drawer__cta,
+.cta__buy,
+.tapeteProduct .tptBuy,
+.gdcCta,
+.btnPrimary,
+#goToPayment,
+.btnGhost,
+.mobileStickyCta__text{
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: .05em;
+}
+
+.cta__buy,
+.tapeteProduct .tptBuy,
+.btnPrimary,
+#goToPayment,
+.gdcCta{
+  font-size: 21px;   /* Barlow Condensed rende .688 da largura do Inter */
+}
+
+.hero.hero--premium .hero__cta,
+.drawer__cta,
+.btnGhost{
+  font-size: 17px;
+}
+
+.mobileStickyCta__text{
+  font-size: 19px;
+}
+
+/* a linha de apoio dentro do botão é pequena → continua em Inter */
+.cta__buySub,
+.tapeteProduct .tptBuy__sub{
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* =========================================================
+   5) BARRA DE AVISOS DO TOPO
+========================================================= */
+
+.topbar__item{
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .06em;
+}
+
+/* =========================================================
+   6) PÁGINAS INTERNAS (políticas + 404)
+   Só para a marca não trocar de cara quando o cliente sai
+   da home. O corpo do texto legal continua em Inter.
+========================================================= */
+
+.legal__title,
+.legal h2,
+.nf__code,
+.nf__title{
+  font-family: var(--font-display);
+  letter-spacing: 0;
+  font-weight: 800;
+}
+
+.legal__title{ font-size: clamp(30px, 7.4vw, 42px); line-height: 1.1; }
+.legal h2{ font-size: clamp(22px, 5.4vw, 27px); }
+.nf__code{ font-size: clamp(78px, 24vw, 136px); }
+.nf__title{ font-size: clamp(24px, 6.6vw, 34px); }
+
+.legal__eyebrow,
+.legal__back{
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: .10em;
+}
+
+.legal__back{ font-size: 16px; letter-spacing: .05em; }

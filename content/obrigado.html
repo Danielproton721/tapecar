@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Pedido confirmado | Tapecar</title>
+  <meta name="description" content="Pedido confirmado — Tapecar." />
+  <meta name="theme-color" content="#FFC400" />
+  <link rel="icon" type="image/svg+xml" href="/images/icone-tapecar-vermelho.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="checkout.css" />
+
+  <!-- TikTok Pixel — base compartilhada -->
+  <script src="tiktok-pixel.js"></script>
+</head>
+<body>
+  <header class="cko-header">
+    <a class="cko-brand" href="/" aria-label="Tapecar início">
+      <img src="/images/logo-tapecar-claro-vermelho.png" alt="Tapecar" width="220" height="32" />
+    </a>
+    <img class="cko-header-seal" src="/assets/badges/pagamento-100-seguro.svg" alt="Pagamento 100% seguro" width="89" height="19" />
+  </header>
+  <div class="cko-gradient-bar" aria-hidden="true"></div>
+
+  <main class="cko-main">
+    <div class="cko-success">
+      <div class="cko-success-card">
+        <div class="cko-success-icon" aria-hidden="true">✓</div>
+        <h1>Pedido confirmado</h1>
+        <p class="cko-success-lead" id="obrigado-lead">Recebemos seu pagamento</p>
+        <p id="obrigado-desc">Você receberá em instantes um e-mail com os detalhes do seu pedido.</p>
+
+        <p class="cko-order-num">Número do pedido: <strong id="obrigado-numero">—</strong></p>
+
+        <dl class="cko-obrigado-resumo" id="obrigado-resumo" hidden>
+          <div>
+            <dt>Forma de pagamento</dt>
+            <dd id="obrigado-metodo">—</dd>
+          </div>
+          <div>
+            <dt>Total</dt>
+            <dd id="obrigado-total">—</dd>
+          </div>
+        </dl>
+
+        <p class="cko-obrigado-proximos">
+          Seus tapetes serão produzidos sob medida para o seu veículo. Assim que forem
+          postadas, você recebe o código de rastreio por e-mail.
+        </p>
+
+        <a class="cko-btn cko-btn-primary cko-btn-block" href="/">Voltar à loja</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="cko-footer">
+    <h2 class="cko-footer-title">Formas de pagamento</h2>
+
+    <div class="cko-footer-pay" aria-label="Formas de pagamento aceitas">
+      <img src="/assets/card-brands/amex.svg" alt="American Express" width="39" height="26" />
+      <img src="/assets/card-brands/visa.svg" alt="Visa" width="39" height="26" />
+      <img src="/assets/card-brands/mastercard.svg" alt="Mastercard" width="39" height="26" />
+      <img src="/assets/card-brands/elo.svg" alt="Elo" width="39" height="26" />
+      <img src="/assets/card-brands/hiper.svg" alt="Hipercard" width="39" height="26" />
+      <img src="/assets/card-pix.svg" alt="Pix" width="39" height="26" />
+    </div>
+
+    <div class="cko-footer-empresa">
+      <p class="cko-footer-nome">Tapecar</p>
+              <p>Rosário da Limeira/MG, 184</p>
+              <p>CNPJ: 97.546.944/0001-09</p>
+      <p>Email: <a href="mailto:ajuda@tapecar.shop">ajuda@tapecar.shop</a></p>
+    </div>
+
+    <nav class="cko-footer-policies" aria-label="Politicas da loja">
+      <a href="/termos-de-uso">Termos de uso</a>
+      <a href="/trocas-e-devolucoes">Trocas e devolucoes</a>
+      <a href="/politica-de-privacidade">Politica de Privacidade</a>
+      <a href="/politica-de-entrega">Politica de Entrega</a>
+    </nav>
+
+    <div class="cko-footer-selos" aria-label="Selos de seguranca">
+      <img src="/assets/badges/selo-ssl.svg" alt="Site seguro com certificado SSL" width="120" height="32" />
+      <img src="/assets/badges/selo-pagamentos.svg" alt="Pagamentos seguros" width="120" height="31" />
+    </div>
+
+    <p class="cko-footer-copy">&copy; <span id="year"></span> Tapecar</p>
+  </footer>
+
+  <script src="analytics.js" defer></script>
+  <script src="obrigado.js" defer></script>
+</body>
+</html>

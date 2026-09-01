@@ -1,0 +1,1668 @@
+:root {
+  --cko-bg: #ffffff;
+  --cko-ink: #0d0d0d;
+  --cko-muted: #6b7280;
+  --cko-line: #e5e5e5;
+  --cko-soft: #f7f6f3;
+  /* CTA verde */
+  --cko-accent: #53AF01;
+  --cko-accent-deep: #468D01;
+  --cko-emerald: #5aa32f;
+  --cko-modern-green: #6eb83c;
+  --cko-brand: #0a0a0a;
+  --cko-steps: #0a0a0a;
+  --cko-notice: #0a0a0a;
+  --cko-footer: #0B0F14;
+  --cko-footer-ink: #ffffff;
+  --cko-footer-muted: #a3a3a3;
+  --cko-pix-discount: #0a0a0a;
+  --cko-bar-1: #0a0a0a;
+  --cko-bar-2: #F5B301;
+  --cko-blue: #1f80e8;
+  --cko-pix-tag: #0a0a0a;
+  --cko-pix-tag-text: #F5B301;
+  --cko-summary-bg: #f7f6f3;
+  --cko-danger: #dc2626;
+  --cko-radius: 0.5rem;
+  --cko-font: "Rubik", system-ui, sans-serif;
+  --cko-header-h: 4.75rem;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Author display rules must not override [hidden] — prevents stuck "Aguarde" overlay */
+[hidden] {
+  display: none !important;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--cko-font);
+  color: var(--cko-ink);
+  background: var(--cko-bg);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.cko-header {
+  position: relative;
+  height: var(--cko-header-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  background: #fff;
+}
+
+/* selo fica no canto direito sem tirar a logo do centro */
+.cko-header-seal {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  width: clamp(58px, 16vw, 76px);
+  height: auto;
+  display: block;
+}
+
+.cko-brand {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.cko-brand img {
+  width: clamp(140px, 40vw, 180px);
+  height: auto;
+  display: block;
+}
+
+.cko-gradient-bar {
+  width: 100%;
+  min-height: 4px;
+  background: var(--cko-bar-1);
+}
+
+/* Barra de urgencia + blocos de confianca */
+.cko-urgencia {
+  background: var(--cko-soft);
+  border-bottom: 1px solid var(--cko-line);
+  padding: 0.7rem 1rem 0.75rem;
+  text-align: center;
+}
+
+.cko-urgencia-titulo {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cko-ink);
+}
+
+.cko-urgencia-sub {
+  margin: 0.25rem 0 0;
+  font-size: 0.82rem;
+  color: var(--cko-muted);
+}
+
+.cko-urgencia-relogio {
+  display: inline-block;
+  min-width: 4.4rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  background: #0a0a0a;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.cko-beneficios {
+  display: grid;
+  gap: 0;
+  max-width: 640px;
+  margin: 1.75rem auto 0;
+  border: 1px solid var(--cko-line);
+  border-radius: var(--cko-radius);
+  background: #fff;
+  overflow: hidden;
+}
+
+.cko-beneficio {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 1rem 1.1rem;
+}
+
+.cko-beneficio + .cko-beneficio {
+  border-top: 1px solid var(--cko-line);
+}
+
+.cko-beneficio-icone {
+  flex-shrink: 0;
+  margin-top: 0.75rem;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+}
+
+.cko-beneficio-icone img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.cko-estrelas {
+  display: block;
+  color: #F5B301;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.cko-beneficio-texto h3 {
+  margin: 0.35rem 0 0.25rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--cko-ink);
+}
+
+.cko-beneficio-texto p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--cko-muted);
+}
+
+.cko-beneficio-texto a {
+  color: var(--cko-ink);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(245, 179, 1, 0.4);
+}
+
+.cko-beneficio-texto a:hover {
+  color: #F5B301;
+  border-bottom-color: #F5B301;
+}
+
+.cko-main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0.85rem 1rem 5.5rem;
+}
+
+/* Boot loader — header + barra já visíveis; forms só após JS pronto */
+body.cko-booting .cko-footer {
+  display: none;
+}
+
+.cko-boot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80dvh;
+  width: 100%;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.cko-boot[hidden] {
+  display: none !important;
+}
+
+.cko-boot-spinner {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 5px solid #999;
+  border-bottom-color: transparent;
+  animation: cko-boot-spin 0.8s linear infinite;
+}
+
+.cko-boot-text {
+  margin: 1rem 0 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #999;
+}
+
+@keyframes cko-boot-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cko-layout {
+  display: grid;
+  gap: 1rem;
+  align-items: start;
+}
+
+.cko-empty {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.cko-empty h1 {
+  font-size: 1.35rem;
+  margin: 0 0 0.5rem;
+}
+
+.cko-empty p {
+  color: var(--cko-muted);
+  margin: 0 0 1.25rem;
+}
+
+/* Steps */
+.cko-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: start;
+  margin: 0;
+  padding: 0;
+}
+
+.cko-step {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 0 1.15rem;
+  color: #222222;
+  min-width: 0;
+  width: 100%;
+}
+
+.cko-step::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20px;
+  z-index: 0;
+  display: block;
+  height: 2px;
+  transform: translateY(-50%);
+  background: #d4d4d5;
+}
+
+.cko-step:disabled {
+  cursor: default;
+  opacity: 1;
+  color: #222222;
+}
+
+.cko-step:disabled .cko-step-label {
+  color: #222222;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.cko-step-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 8px;
+  border: 2px solid #d4d4d5;
+  background: #fff;
+  color: #9ca3af;
+  transition: background 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.cko-step-icon svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.cko-step-label {
+  position: absolute;
+  top: 2.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 20ch;
+  width: max-content;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #222222;
+  letter-spacing: 0;
+  text-transform: none;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cko-step.is-current .cko-step-icon,
+.cko-step.is-done .cko-step-icon {
+  border-color: var(--cko-steps);
+  background: var(--cko-steps);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.cko-step.is-current::before,
+.cko-step.is-done::before {
+  background: var(--cko-steps);
+}
+
+.cko-step.is-done:not(:disabled) {
+  cursor: pointer;
+}
+
+/* Pix discount banner — Tropical Nuts step 1 (after phone field) */
+.cko-pix-banner {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0.35rem 0 0.85rem;
+  padding: 0.625rem 1rem;
+  border-radius: 0.375rem;
+  background: #f3f4f6;
+}
+
+.cko-pix-banner-icon {
+  display: block;
+  height: 1.25rem;
+  width: auto;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.cko-pix-banner p {
+  margin: 0;
+  max-width: 32ch;
+  font-size: 0.75rem;
+  line-height: 1.375;
+  color: #262626;
+  font-weight: 400;
+}
+
+.cko-pix-banner strong {
+  font-weight: 600;
+  color: var(--cko-emerald);
+}
+
+.cko-hint-top {
+  margin: -0.35rem 0 1rem;
+}
+
+/* Cards / fields */
+.cko-card {
+  border: 1px solid var(--cko-line);
+  border-radius: var(--cko-radius);
+  padding: 1rem 1rem 1.1rem;
+  background: #fff;
+  margin-bottom: 1rem;
+}
+
+.cko-card-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.cko-card-sub {
+  margin: 0 0 1rem;
+  color: var(--cko-muted);
+  font-size: 0.86rem;
+}
+
+.cko-field {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.cko-field label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.cko-optional {
+  font-weight: 400;
+  color: var(--cko-muted);
+}
+
+.cko-control {
+  position: relative;
+  width: 100%;
+}
+
+.cko-field input,
+.cko-field select {
+  width: 100%;
+  min-height: 2.85rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--cko-line);
+  border-radius: var(--cko-radius);
+  background: #fff;
+  color: var(--cko-ink);
+  outline: none;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+.cko-control input,
+.cko-control select {
+  padding-right: 2.4rem;
+}
+
+.cko-field-check {
+  position: absolute;
+  top: 50%;
+  right: 0.7rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  transform: translateY(-50%) scale(0.85);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s var(--ease), transform 0.15s var(--ease);
+  background: center / contain no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23059669' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+}
+
+.cko-field.is-valid .cko-field-check {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+.cko-field input:focus,
+.cko-field select:focus {
+  border-color: #F5B301;
+  box-shadow: 0 0 0 3px rgba(245, 179, 1, 0.25);
+}
+
+.cko-field.is-invalid input,
+.cko-field.is-invalid select {
+  border-color: var(--cko-danger);
+}
+
+.cko-field-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.cko-secure-note {
+  margin: 0.35rem 0 0.85rem;
+  font-size: 0.78rem;
+  color: var(--cko-muted);
+  line-height: 1.4;
+}
+
+.cko-field-cep .cko-control {
+  width: 100%;
+}
+
+.cko-address-details {
+  display: grid;
+  gap: 0;
+  margin-top: 0.15rem;
+  animation: cko-reveal 0.28s var(--ease);
+}
+
+.cko-address-details[hidden] {
+  display: none !important;
+}
+
+#shipping-card {
+  animation: cko-reveal 0.28s var(--ease);
+}
+
+.cko-address-summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.cko-address-summary-text {
+  min-width: 0;
+}
+
+.cko-address-summary-text strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--cko-ink);
+  line-height: 1.35;
+}
+
+.cko-address-summary-text .cko-card-sub {
+  margin: 0.25rem 0 0;
+}
+
+@keyframes cko-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(0.35rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.cko-hint {
+  font-size: 0.75rem;
+  color: var(--cko-muted);
+}
+
+.cko-error {
+  min-height: 0;
+  font-size: 0.75rem;
+  color: var(--cko-danger);
+}
+
+.cko-error:empty {
+  display: none;
+}
+
+.cko-payment-error {
+  margin: 0 0 0.85rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--cko-danger) 35%, transparent);
+  background: color-mix(in srgb, var(--cko-danger) 8%, white);
+  border-radius: 0.4rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.cko-payment-error[hidden] {
+  display: none !important;
+}
+
+/* Shipping */
+.cko-shipping {
+  display: grid;
+  gap: 0.625rem;
+}
+
+.cko-ship-option {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.625rem;
+  align-items: start;
+  border: 1.5px solid #d4d4d5;
+  border-radius: 5px;
+  padding: 0.7rem 0.9rem;
+  cursor: pointer;
+  background: #fff;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.cko-ship-option:has(input:checked),
+.cko-ship-option.is-selected {
+  border-color: var(--cko-accent);
+  background: rgba(39, 17, 89, 0.1);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.cko-ship-option input {
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  margin: 0.35rem 0 0;
+  border: 1.5px solid #d4d4d5;
+  border-radius: 999px;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.cko-ship-option:has(input:checked) input,
+.cko-ship-option.is-selected input {
+  border: 5px solid var(--cko-accent);
+}
+
+.cko-ship-body {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.cko-ship-option strong {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.cko-ship-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.cko-ship-turnaround {
+  font-size: 0.875rem;
+  color: #333;
+  line-height: 1.2;
+}
+
+.cko-ship-carrier {
+  display: block;
+  object-fit: contain;
+  height: 1.35rem;
+  width: auto;
+  max-width: 4.7rem;
+}
+
+.cko-ship-price {
+  align-self: center;
+  font-weight: 600;
+  font-size: 1rem;
+  white-space: nowrap;
+  color: #333;
+}
+
+.cko-ship-price.is-free {
+  color: var(--cko-accent);
+  font-weight: 700;
+}
+
+/* Payment accordion (PIX first, Finalizar inside panel) */
+.cko-pay-methods {
+  display: grid;
+  gap: 0.65rem;
+  margin-bottom: 0.25rem;
+}
+
+.cko-pay-block {
+  border: 1.5px solid var(--cko-line);
+  border-radius: var(--cko-radius);
+  background: #fff;
+  overflow: hidden;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.cko-pay-block.is-selected {
+  border-color: var(--cko-accent);
+  background: rgba(197, 160, 89, 0.08);
+}
+
+.cko-pay-option {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0.65rem 0.75rem;
+  padding: 0.9rem 0.95rem;
+  cursor: pointer;
+}
+
+.cko-pay-option-card {
+  align-items: flex-start;
+}
+
+.cko-pay-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cko-pay-method-icon {
+  width: auto;
+  height: 1.35rem;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.cko-pay-icon {
+  width: 2.35rem;
+  height: 2.35rem;
+  display: grid;
+  place-items: center;
+  background: var(--cko-soft);
+  border-radius: 0.4rem;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #374151;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.cko-pay-icon svg {
+  display: block;
+}
+
+.cko-pay-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.cko-pay-text-stack {
+  gap: 0.375rem;
+}
+
+.cko-pay-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.35;
+}
+
+.cko-pay-title-nowrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: block;
+}
+
+.cko-pay-hint-text {
+  color: var(--cko-muted);
+  font-size: 0.75rem;
+}
+
+.cko-pix-valor {
+  margin: 0 0 0.95rem;
+  font-size: 0.9rem;
+  color: #333;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
+}
+
+.cko-pix-valor-now {
+  color: var(--cko-accent);
+  font-weight: 700;
+}
+
+.cko-pix-valor-was {
+  color: var(--cko-muted);
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
+.cko-pix-valor-was[hidden] {
+  display: none !important;
+}
+
+.cko-card-brands {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-left: 0;
+}
+
+.cko-card-brands img {
+  height: 26px;
+  width: 39px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.cko-pay-panel {
+  padding: 0 0.95rem 1rem;
+  border-top: 1px solid var(--cko-line);
+}
+
+.cko-pay-panel[hidden] {
+  display: none !important;
+}
+
+.cko-pay-confirm {
+  margin: 0.85rem 0 0.45rem;
+  font-size: 0.86rem;
+  color: #374151;
+  line-height: 1.45;
+}
+
+.cko-pay-confirm-sub {
+  margin: 0.85rem 0 0.75rem;
+  font-size: 0.8rem;
+  color: var(--cko-muted);
+  line-height: 1.45;
+}
+
+.cko-pay-panel .cko-btn {
+  margin-top: 0.25rem;
+}
+
+/* Buttons */
+.cko-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.95rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: var(--cko-radius);
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 0.94rem;
+  cursor: pointer;
+  transition: background 0.2s var(--ease), transform 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+
+.cko-btn:hover {
+  transform: translateY(-1px);
+}
+
+.cko-btn:active {
+  transform: none;
+}
+
+.cko-btn-primary {
+  background: var(--cko-accent);
+  color: #fff;
+}
+
+.cko-btn-primary:hover {
+  background: var(--cko-accent-deep);
+}
+
+/* Secundario: contorno preto, preenche no hover */
+.cko-btn-ghost {
+  background: #fff;
+  border-color: #0a0a0a;
+  color: #0a0a0a;
+}
+
+.cko-btn-ghost:hover {
+  border-color: #0a0a0a;
+  background: #0a0a0a;
+  color: #fff;
+}
+
+.cko-btn-block {
+  width: 100%;
+}
+
+.cko-sticky-cta {
+  position: sticky;
+  bottom: 0;
+  z-index: 30;
+  margin: 0.5rem -1rem -0.25rem;
+  padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  background: rgba(255, 255, 255, 0.96);
+  border-top: 1px solid var(--cko-line);
+  backdrop-filter: blur(8px);
+}
+
+.cko-sticky-cta-split {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.55rem;
+}
+
+.cko-sticky-cta-split:has(> :only-child) {
+  grid-template-columns: auto;
+}
+
+.cko-sticky-cta-split .cko-btn-primary {
+  width: 100%;
+}
+
+/* Order summary — Tropical Nuts RESUMO block */
+.cko-summary {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.cko-summary-mobile {
+  display: block;
+  margin-bottom: 0.65rem;
+}
+
+.cko-summary-toggle {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  cursor: pointer;
+  background: var(--cko-summary-bg);
+  border-radius: 0.5rem;
+  border: 2px solid transparent;
+  color: #262626;
+}
+
+.cko-summary-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.cko-summary-toggle-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.cko-summary-kicker {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #262626;
+  text-transform: uppercase;
+}
+
+.cko-summary-sub {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: #262626;
+  font-weight: 400;
+}
+
+.cko-summary-toggle-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.cko-summary-price {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--cko-modern-green);
+}
+
+.cko-summary-chevron {
+  color: #262626;
+  transition: transform 0.2s var(--ease);
+  flex-shrink: 0;
+}
+
+.cko-summary-mobile[open] .cko-summary-chevron {
+  transform: rotate(180deg);
+}
+
+.cko-summary-body {
+  padding: 0.85rem 1.05rem 1.05rem;
+  margin-top: 0.35rem;
+  background: var(--cko-summary-bg);
+  border-radius: 0.5rem;
+}
+
+.cko-summary-desktop {
+  display: none;
+  padding: 1.25rem;
+  background: var(--cko-summary-bg);
+  border-radius: 0.5rem;
+}
+
+.cko-summary-desktop-head {
+  margin-bottom: 1rem;
+}
+
+.cko-summary-desktop h2,
+.cko-summary-desktop-head .cko-summary-kicker {
+  display: block;
+}
+
+.cko-summary-items {
+  display: grid;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.cko-line {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 0.7rem;
+  align-items: start;
+}
+
+.cko-line img {
+  width: 64px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 0.35rem;
+  background: #e5e7eb;
+}
+
+.cko-line-info {
+  min-width: 0;
+}
+
+.cko-line h3 {
+  margin: 0 0 0.2rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.cko-line p {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--cko-muted);
+}
+
+.cko-qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 0.45rem;
+  border: 1px solid #d0d0d0;
+  border-radius: 0.35rem;
+  overflow: hidden;
+  background: #fff;
+}
+
+.cko-qty-btn {
+  appearance: none;
+  width: 1.85rem;
+  height: 1.85rem;
+  border: 0;
+  background: #fff;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cko-qty-btn:hover {
+  background: #f3f4f6;
+}
+
+.cko-qty-value {
+  min-width: 1.6rem;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-left: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+  line-height: 1.85rem;
+}
+
+.cko-line-price {
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cko-totals {
+  margin: 0;
+  display: grid;
+  gap: 0.45rem;
+  font-size: 0.9rem;
+}
+
+.cko-totals > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cko-totals dt {
+  margin: 0;
+  color: var(--cko-muted);
+  font-weight: 400;
+}
+
+.cko-totals dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.cko-discount {
+  color: var(--cko-accent-deep) !important;
+}
+
+.cko-total-row {
+  padding-top: 0.55rem;
+  margin-top: 0.25rem;
+  border-top: 1px solid var(--cko-line);
+  font-size: 1.05rem;
+}
+
+.cko-total-row dt,
+.cko-total-row dd {
+  color: var(--cko-ink);
+  font-weight: 700;
+}
+
+/* Overlay / success */
+.cko-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(17, 24, 39, 0.55);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.cko-overlay-card {
+  background: #fff;
+  border-radius: var(--cko-radius);
+  padding: 1.75rem 1.5rem;
+  max-width: 360px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+}
+
+.cko-overlay-card p {
+  margin: 1rem 0 0;
+  font-size: 0.92rem;
+}
+
+.cko-spinner {
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 3px solid #e5e7eb;
+  border-top-color: var(--cko-accent);
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cko-success {
+  max-width: 480px;
+  margin: 1.5rem auto 0;
+}
+
+.cko-success-card {
+  border: 1px solid var(--cko-line);
+  border-radius: var(--cko-radius);
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  background: #fff;
+  animation: rise 0.45s var(--ease);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cko-success-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: var(--cko-accent);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.cko-success-card h1 {
+  margin: 0 0 0.4rem;
+  font-size: 1.45rem;
+}
+
+.cko-success-lead {
+  margin: 0 0 0.35rem;
+  font-weight: 600;
+  color: var(--cko-accent-deep);
+}
+
+.cko-success-card p {
+  margin: 0 0 0.75rem;
+  color: var(--cko-muted);
+  font-size: 0.92rem;
+}
+
+.cko-order-num {
+  color: var(--cko-ink) !important;
+}
+
+/* Footer */
+
+.cko-obrigado-resumo {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1.1rem 0 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--cko-line);
+  border-radius: var(--cko-radius);
+  background: var(--cko-soft);
+  text-align: left;
+}
+
+.cko-obrigado-resumo > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.cko-obrigado-resumo dt {
+  color: var(--cko-muted);
+  font-size: 0.85rem;
+}
+
+.cko-obrigado-resumo dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.cko-obrigado-proximos {
+  margin: 1.1rem 0 1.4rem;
+  color: var(--cko-muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+
+
+.cko-footer-pay img {
+  height: 26px;
+  width: 39px;
+  object-fit: contain;
+  display: block;
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+
+.cko-footer-security img {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: 110px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 6px;
+  padding: 4px 6px;
+  box-sizing: content-box;
+}
+
+
+.cko-footer strong {
+  color: #ffffff;
+}
+
+
+
+
+@media (max-width: 380px) {
+  .cko-footer-policies {
+    gap: 6px 14px;
+  }
+
+  .cko-footer-policies a {
+    font-size: 12px;
+  }
+}
+
+
+@media (min-width: 480px) {
+  .cko-field-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .cko-header {
+    padding: 0 1.75rem;
+  }
+
+  .cko-header-seal {
+    right: 1.75rem;
+  }
+
+  .cko-main {
+    padding: 1.5rem 1.75rem 3.5rem;
+  }
+
+  .cko-layout {
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+    grid-template-areas:
+      "steps summary"
+      "form summary";
+    gap: 1.75rem;
+  }
+
+  .cko-steps {
+    grid-area: steps;
+    max-width: 420px;
+  }
+
+  .cko-summary {
+    grid-area: summary;
+    position: sticky;
+    top: 1rem;
+  }
+
+  .cko-form-col {
+    grid-area: form;
+  }
+
+  .cko-summary-mobile {
+    display: none;
+  }
+
+  .cko-summary-desktop {
+    display: block;
+  }
+
+  .cko-field-row-desktop {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .cko-sticky-cta {
+    position: static;
+    margin: 0.25rem 0 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    backdrop-filter: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cko-layout {
+    gap: 2.25rem;
+  }
+
+  .cko-card {
+    padding: 1.15rem 1.2rem 1.25rem;
+  }
+}
+
+
+/* ==========================================================================
+   RODAPE — padrao vermelho, centralizado
+   ========================================================================== */
+
+.cko-footer {
+  background: #E11B22;
+  color: #ffffff;
+  padding: 28px 20px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.cko-footer-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Bandeiras em caixa branca — sem isso os logos escuros somem no vermelho. */
+.cko-footer-pay {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 420px;
+}
+.cko-footer-pay img {
+  height: 26px;
+  width: 39px;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 2px 3px;
+}
+
+.cko-footer-empresa {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.cko-footer-empresa p { margin: 0; color: #ffffff; }
+.cko-footer-nome { font-weight: 700; }
+.cko-footer-empresa a { color: #ffffff; text-decoration: underline; text-underline-offset: 2px; }
+
+.cko-footer-policies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px 10px;
+  font-size: 13px;
+}
+.cko-footer-policies a {
+  color: #ffffff;
+  text-decoration: none;
+}
+/* Preto no hover: sobre o vermelho ele destaca sem inventar uma cor nova. */
+.cko-footer-policies a:hover,
+.cko-footer-policies a:focus-visible {
+  color: #000000;
+  text-decoration: underline;
+}
+
+/* Separador "|" entre os links, como na referencia — desenhado pelo CSS
+   para nao existir caractere solto no HTML atrapalhando leitor de tela. */
+.cko-footer-policies a + a::before {
+  content: "|";
+  margin-right: 10px;
+  opacity: .6;
+}
+
+/* Os dois selos vem em SVG com currentColor, entao herdam o branco daqui. */
+.cko-footer-selos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  color: #ffffff;
+  margin-top: 2px;
+}
+.cko-footer-selos img { height: 32px; width: auto; }
+
+.cko-footer-copy {
+  margin: 0;
+  font-size: 12px;
+  color: #ffffff;
+}
+
+@media (max-width: 480px) {
+  .cko-footer { padding: 24px 16px 28px; gap: 16px; }
+  .cko-footer-selos { gap: 16px; }
+}
+
+/* ============================================================================
+   AJUSTES PEDIDOS PELOS PRINTS
+   ========================================================================== */
+
+/* numero da etapa ao lado do titulo — quadrado vermelho arredondado */
+.cko-card-num{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 9px;
+  border-radius: 7px;
+  background: #E11B22;
+  color: #ffffff;      /* 4,80:1 sobre o vermelho */
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  flex: 0 0 auto;
+}
+
+.cko-card-title{ display: flex; align-items: center; }
+
+/* "Voce ganhou 5% de desconto pagando com Pix" */
+.cko-pix-hint{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0 4px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #F3F4F6;
+  color: #374151;      /* 8,9:1 sobre o cinza claro */
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.cko-pix-hint strong{ color: #15803D; }   /* 4,9:1 sobre #F3F4F6 */
+.cko-pix-hint img{ flex: 0 0 auto; }
+
+/* selo verde no item do resumo */
+.cko-line-pix{
+  display: inline-block;
+  margin: 6px 0 2px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  background: #15803D;
+  color: #ffffff;      /* 4,61:1 — #16A34A dava so 3,30:1 e o texto tem 11px */
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+
+/* "Remover produto" */
+.cko-line-remove{
+  display: block;
+  margin-top: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #4B5563;      /* 6,28:1 sobre o #F7F6F3 do resumo — #6B7280 dava 4,47:1 */
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.cko-line-remove:hover{ color: #111827; }
+
+/* ============================================================================
+   CORES DO PRINT
+   ---------------------------------------------------------------------------
+   Dois tokens estavam fora do lugar e apareciam na tela:
+
+     --cko-steps  estava #0a0a0a (preto). No print a etapa ativa e a linha que
+                  liga as etapas sao VERMELHAS.
+     --cko-bar-2  estava #F5B301 — ambar da marca antiga, sobrevivente do
+                  rebrand. Pintava a faixa logo abaixo do topo.
+   ========================================================================== */
+:root{
+  --cko-steps: #E11B22;
+  --cko-bar-2: #E11B22;
+}
+
+/* TOPO BRANCO. Eu tinha escurecido para #0B0F14 lendo errado o print — o
+   fundo escuro daquelas imagens era a moldura da pagina, nao a barra.
+   Com o topo branco voltam juntos:
+     - o logo na variante de fundo claro ("TAPE" escuro), senao ele some;
+     - o selo sem invert(1), porque o SVG e fill="#000000" e preto sobre
+       branco ja e o contraste correto.
+   Fica so o space-between, que o print realmente mostra: logo a esquerda,
+   selo a direita. */
+.cko-header{
+  background: #ffffff;
+  justify-content: space-between;
+}
+
+/* "Grátis" no resumo, em verde como no print */
+[data-summary-shipping]{ color: #15803D; font-weight: 700; }
+
+/* ============================================================================
+   BARRA DA OFERTA — vermelha, como no print
+   ---------------------------------------------------------------------------
+   Eu tinha trocado so o TEXTO e deixado o fundo em var(--cko-soft), que e
+   creme com letra escura. No print a faixa e vermelha com as duas linhas em
+   branco e negrito, colada no topo escuro.
+   ========================================================================== */
+.cko-urgencia{
+  background: #E11B22;
+  border-bottom: 0;
+  padding: 0.85rem 1rem 0.9rem;
+  text-align: center;
+}
+
+.cko-urgencia-titulo{
+  color: #ffffff;          /* 4,80:1 sobre #E11B22 */
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.cko-urgencia-sub{
+  margin: 0.3rem 0 0;
+  color: #ffffff;          /* no print a segunda linha tambem e branca e forte */
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* a faixa fina entre o topo e a oferta some: no print os dois blocos se tocam */
+.cko-gradient-bar{ display: none; }

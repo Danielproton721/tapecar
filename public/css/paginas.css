@@ -1,0 +1,157 @@
+/* =========================================================
+   PÁGINAS INSTITUCIONAIS — Tapecar
+   Usa a mesma paleta, tipografia e componentes da LP.
+   Carregar sempre DEPOIS de css/style.css.
+========================================================= */
+
+.legal{
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 28px 20px 56px;
+}
+
+/* Cabeçalho da página */
+.legal__head{
+  text-align: center;
+  padding: 8px 0 22px;
+  border-bottom: 1px solid rgba(15,23,42,.10);
+  margin-bottom: 26px;
+}
+
+.legal__eyebrow{
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #8a6400;
+  background: #FFF8E6;
+  border: 1px solid rgba(245,179,1,.35);
+  border-radius: 999px;
+  padding: 6px 14px;
+  margin-bottom: 12px;
+}
+
+.legal__title{
+  font-size: clamp(24px, 6vw, 34px);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -.01em;
+  color: #0B0F14;
+}
+
+.legal__title span{ color: #F5B301; }
+
+.legal__updated{
+  margin-top: 10px;
+  font-size: 13px;
+  color: #5B6472;
+}
+
+/* Corpo */
+.legal h2{
+  font-size: clamp(18px, 4.4vw, 22px);
+  font-weight: 800;
+  line-height: 1.3;
+  color: #0B0F14;
+  margin: 30px 0 10px;
+  padding-left: 12px;
+  border-left: 4px solid #F5B301;
+}
+
+.legal h3{
+  font-size: 16px;
+  font-weight: 700;
+  color: #0B0F14;
+  margin: 20px 0 8px;
+}
+
+.legal p{
+  font-size: 15px;
+  line-height: 1.7;
+  color: #3b4553;
+  margin: 0 0 12px;
+}
+
+.legal ul{
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.legal ul li{
+  position: relative;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #3b4553;
+  padding-left: 22px;
+  margin-bottom: 8px;
+}
+
+.legal ul li::before{
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: #F5B301;
+}
+
+.legal strong{ color: #0B0F14; font-weight: 700; }
+
+.legal a{
+  color: #8a6400;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.legal a:hover{ color: #F5B301; }
+
+/* Caixa de destaque (contato / avisos) */
+.legalBox{
+  background: #F7F8FB;
+  border: 1px solid rgba(15,23,42,.10);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 20px 0 6px;
+}
+
+.legalBox p:last-child{ margin-bottom: 0; }
+
+.legalBox--accent{
+  background: #FFF8E6;
+  border-color: rgba(245,179,1,.35);
+}
+
+/* Voltar para a loja */
+.legal__back{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 30px;
+  padding: 12px 20px;
+  background: #F5B301;
+  color: #121519;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: filter .15s ease, transform .15s ease;
+}
+
+.legal__back:hover{
+  filter: brightness(.94);
+  transform: translateY(-1px);
+  color: #121519;
+}
+
+/* Header simplificado das páginas internas */
+.hdr__logoLink--legal{ text-decoration: none; }
+
+@media (max-width: 520px){
+  .legal{ padding: 20px 16px 44px; }
+  .legal h2{ margin-top: 26px; }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "tapecar-next",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tapecar — LP tapete bandeja + checkout, migrada de HTML estático para Next.js (Vercel).",
+  "scripts": {
+    "dev": "next dev -p 3010",
+    "build": "next build",
+    "start": "next start -p 3010"
+  },
+  "dependencies": {
+    "next": "^15.5.4",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  }
+}

@@ -1,0 +1,1412 @@
+/* =========================================================
+   PRODUTO TAPETES — V2
+   Todo o bloco vive dentro de .tapeteProduct (ou usa prefixo tpt*).
+   Nada aqui pode alcançar Hero, Header, Footer, avaliações,
+   modal genérico ou sticky CTA.
+   Carregar sempre DEPOIS de css/style.css.
+========================================================= */
+
+.tapeteProduct{
+  --tpt-ink:      #0B0F14;
+  --tpt-muted:    #5B6472;
+  --tpt-line:     rgba(15,23,42,.10);
+  /* estes 3 seguem o tema; redefinir com hex aqui vencia o :root
+     por proximidade e prendia a secao no ambar */
+  --tpt-accent:   var(--marca);
+  --tpt-accent-d: var(--marca-escura);
+  --tpt-soft:     var(--marca-suave);
+  --tpt-green:    #16a34a;
+  --tpt-green-d:  #15803d;
+
+  padding: 44px 0 24px;
+  background: #fff;
+  color: var(--tpt-ink);
+}
+
+@media (max-width: 768px){
+  .tapeteProduct{ padding: 32px 0 20px; }
+}
+
+/* Mesma largura da coluna de compra (.cta__wrap = 420px),
+   para os dois produtos ficarem visualmente consistentes no desktop. */
+.tapeteProduct .tpt__wrap{
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.tapeteProduct .tpt__title{
+  font-size: clamp(22px, 5.4vw, 30px);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  text-align: center;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.tapeteProduct .tpt__title::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 46px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--tpt-accent);
+}
+
+.tapeteProduct .tpt__subtitle{
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--tpt-muted);
+}
+
+/* ================= GALERIA ================= */
+
+.tapeteProduct .tptGallery{ margin-top: 18px; }
+
+.tapeteProduct .tptGallery__main{
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--tpt-line);
+  border-radius: 18px;
+  background: #F7F8FB;
+  overflow: hidden;
+  cursor: zoom-in;
+  box-shadow: 0 10px 26px rgba(2,6,23,.07);
+}
+
+.tapeteProduct .tptGallery__main img{
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.tapeteProduct .tptGallery__thumbs{
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+}
+
+.tapeteProduct .tptGallery__thumbs::-webkit-scrollbar{ display: none; }
+
+.tapeteProduct .tptGallery__thumb{
+  flex: 0 0 auto;
+  width: 62px;
+  height: 62px;
+  padding: 0;
+  border: 2px solid var(--tpt-line);
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: border-color .15s ease, transform .15s ease;
+}
+
+.tapeteProduct .tptGallery__thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tapeteProduct .tptGallery__thumb.is-active{
+  border-color: var(--tpt-accent);
+  transform: translateY(-1px);
+}
+
+/* ================= KITS ================= */
+
+.tapeteProduct .tptKit__note{
+  margin-top: 22px;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--tpt-accent-d);
+  background: var(--tpt-soft);
+  border: 1px solid rgba(245,179,1,.30);
+  border-radius: 999px;
+  padding: 7px 14px;
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tapeteProduct .tptKit__head{ margin-top: 18px; text-align: center; }
+
+.tapeteProduct .tptKit__title{
+  font-size: clamp(18px, 4.4vw, 22px);
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.tapeteProduct .tptKit__sub{
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--tpt-muted);
+}
+
+/* Kits sempre empilhados — a coluna tem 420px */
+.tapeteProduct .tptKit__grid{
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.tapeteProduct .tptKitCard{
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px minmax(0,1fr) auto;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 12px;
+  text-align: left;
+  border: 2px solid var(--tpt-line);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--tpt-ink);
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(2,6,23,.06);
+  transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+
+.tapeteProduct .tptKitCard:hover{
+  box-shadow: 0 14px 34px rgba(2,6,23,.10);
+  transform: translateY(-1px);
+}
+
+.tapeteProduct .tptKitCard.is-selected{
+  border-color: var(--tpt-accent);
+  background: #FFFDF6;
+}
+
+.tapeteProduct .tptKitCard:focus-visible{
+  outline: 3px solid rgba(245,179,1,.35);
+  outline-offset: 2px;
+}
+
+.tapeteProduct .tptKitCard__badge{
+  position: absolute;
+  top: -9px;
+  right: 12px;
+  font-size: 9.5px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--tpt-accent);
+  border-radius: 999px;
+  padding: 4px 9px;
+  line-height: 1;
+}
+
+.tapeteProduct .tptKitCard__badge--soft{
+  color: var(--tpt-accent-d);
+  background: var(--tpt-soft);
+  border: 1px solid rgba(245,179,1,.40);
+}
+
+.tapeteProduct .tptKitCard__thumb{
+  display: block;
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #F2F4F8;
+}
+
+.tapeteProduct .tptKitCard__thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.tapeteProduct .tptKitCard__mid{ display: block; min-width: 0; }
+
+.tapeteProduct .tptKitCard__eyebrow{
+  display: block;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  color: var(--tpt-muted);
+  text-transform: uppercase;
+}
+
+.tapeteProduct .tptKitCard__name{
+  display: block;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-top: 2px;
+  color: var(--tpt-ink);
+}
+
+.tapeteProduct .tptKitCard__save{
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--tpt-green-d);
+  background: rgba(22,163,74,.10);
+  border-radius: 999px;
+  padding: 3px 8px;
+}
+
+.tapeteProduct .tptKitCard__right{ text-align: right; }
+
+.tapeteProduct .tptKitCard__old{
+  display: block;
+  font-size: 11px;
+  color: var(--tpt-muted);
+  text-decoration: line-through;
+}
+
+.tapeteProduct .tptKitCard__now{
+  display: block;
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--tpt-green-d);
+  line-height: 1.15;
+}
+
+@media (max-width: 380px){
+  .tapeteProduct .tptKitCard{ grid-template-columns: 52px minmax(0,1fr) auto; gap: 9px; padding: 13px 10px; }
+  .tapeteProduct .tptKitCard__thumb{ width: 52px; height: 52px; }
+  .tapeteProduct .tptKitCard__name{ font-size: 13px; }
+  .tapeteProduct .tptKitCard__now{ font-size: 16px; }
+}
+
+/* ================= PAINEL DE VEÍCULO ================= */
+
+.tapeteProduct .tptPanel{
+  margin-top: 20px;
+  padding: 18px 16px;
+  border: 1px solid var(--tpt-line);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(2,6,23,.07);
+}
+
+.tapeteProduct .tptPanel__title{
+  font-size: clamp(17px, 4.2vw, 21px);
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.tapeteProduct .tptPanel__accent{ color: var(--tpt-accent); }
+
+.tapeteProduct .tptPanel__sub{
+  margin-top: 4px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--tpt-muted);
+}
+
+.tapeteProduct .tptField{
+  margin-bottom: 12px;
+  opacity: 1;
+  max-height: 260px;
+  transform: translateY(0);
+  overflow: visible;
+  transition: opacity .25s ease, transform .25s ease, max-height .25s ease, margin .25s ease;
+}
+
+.tapeteProduct .tptField.is-hidden{
+  opacity: 0;
+  max-height: 0;
+  margin-bottom: 0;
+  transform: translateY(-6px);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.tapeteProduct .tptField label{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: var(--tpt-ink);
+}
+
+.tapeteProduct .tptStepNum{
+  display: grid;
+  place-items: center;
+  width: 21px;
+  height: 21px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--tpt-muted);
+  background: #EEF1F6;
+  flex: 0 0 auto;
+}
+
+.tapeteProduct .tptField.is-active .tptStepNum{
+  color: #fff;
+  background: var(--tpt-accent);
+}
+
+.tapeteProduct .tptField.is-done .tptStepNum{
+  color: #fff;
+  background: var(--tpt-green);
+}
+
+.tapeteProduct .tptStepCheck{
+  opacity: 0;
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--tpt-green);
+  transition: opacity .2s ease;
+}
+
+.tapeteProduct .tptField.is-done .tptStepCheck{ opacity: 1; }
+
+.tapeteProduct .tptField select{
+  width: 100%;
+  height: 48px;
+  padding: 0 12px;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--tpt-ink);
+  background: #fff;
+  border: 1.5px solid var(--tpt-line);
+  border-radius: 12px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B6472' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 36px;
+}
+
+.tapeteProduct .tptField.is-active select{
+  border-color: var(--tpt-accent);
+  box-shadow: 0 0 0 3px var(--marca-halo);
+}
+
+.tapeteProduct .tptField select:focus{
+  outline: none;
+  border-color: var(--tpt-accent);
+  box-shadow: 0 0 0 3px rgba(245,179,1,.20);
+}
+
+.tapeteProduct .tptField select:disabled{
+  background-color: #F5F6F9;
+  color: #9AA3B0;
+  cursor: not-allowed;
+}
+
+/* ----- cores ----- */
+
+.tapeteProduct .tptColors{
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 4px 0 2px;
+}
+
+.tapeteProduct .tptColorOpt{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.tapeteProduct .tptColorBtn{
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 2px solid rgba(15,23,42,.14);
+  cursor: pointer;
+  padding: 0;
+  transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.tapeteProduct .tptColorBtn:hover{ transform: scale(1.06); }
+
+.tapeteProduct .tptColorBtn--preto{ background: #111111; }
+
+.tapeteProduct .tptColorBtn.is-selected{
+  border-color: var(--tpt-accent);
+  box-shadow: 0 0 0 3px rgba(245,179,1,.30);
+}
+
+.tapeteProduct .tptColorBtn.is-selected::after{
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 900;
+  text-shadow: 0 1px 3px rgba(0,0,0,.45);
+}
+
+.tapeteProduct .tptColorBtn:focus-visible{
+  outline: 3px solid rgba(245,179,1,.35);
+  outline-offset: 2px;
+}
+
+.tapeteProduct .tptColorOpt__name{
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--tpt-muted);
+}
+
+/* ----- resultado ----- */
+
+.tapeteProduct .tptResult{ display: none; margin-top: 4px; }
+
+.tapeteProduct .tptResult__ok{
+  padding: 11px 13px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #14532d;
+  background: rgba(22,163,74,.10);
+  border: 1px solid rgba(22,163,74,.28);
+}
+
+/* ================= PREÇO + CTA ================= */
+
+.tapeteProduct .tptPrice{
+  margin-top: 18px;
+  padding: 16px;
+  text-align: center;
+  border: 1px solid var(--tpt-line);
+  border-radius: 18px;
+  background: #FCFDFE;
+  box-shadow: 0 10px 26px rgba(2,6,23,.06);
+}
+
+.tapeteProduct .tptPrice__compare{
+  font-size: 13px;
+  color: var(--tpt-muted);
+}
+
+.tapeteProduct .tptPrice__compare span{ text-decoration: line-through; }
+
+.tapeteProduct .tptPrice__main{
+  margin-top: 2px;
+  font-size: clamp(28px, 8vw, 38px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: var(--tpt-green-d);
+}
+
+.tapeteProduct .tptPrice__kit{
+  margin-top: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--tpt-muted);
+}
+
+.tapeteProduct .tptBuy{
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  padding: 17px 18px;
+  border: 0;
+  border-radius: 14px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: .01em;
+  color: #fff;
+  background: var(--tpt-green);
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(22,163,74,.26);
+  transition: filter .15s ease, transform .12s ease;
+}
+
+.tapeteProduct .tptBuy:hover{ filter: brightness(1.05); }
+.tapeteProduct .tptBuy:active{ transform: scale(.99); }
+
+.tapeteProduct .tptBuy:focus-visible{
+  outline: 3px solid rgba(22,163,74,.30);
+  outline-offset: 3px;
+}
+
+.tapeteProduct .tptBuy__sub{
+  display: block;
+  margin-top: 3px;
+  font-size: 11.5px;
+  font-weight: 700;
+  opacity: .9;
+  letter-spacing: 0;
+}
+
+.tapeteProduct .tptCombo{
+  margin-top: 12px;
+  padding: 11px 13px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 800;
+  color: #14532d;
+  background: rgba(22,163,74,.10);
+  border: 1px solid rgba(22,163,74,.28);
+  border-radius: 12px;
+}
+
+.tapeteProduct .tptCombo[hidden]{ display: none; }
+
+/* =========================================================
+   TEXTURAS — vivem dentro do modal (#orderTapete),
+   por isso ficam fora de .tapeteProduct. Prefixo tptTx.
+========================================================= */
+
+#orderTapete .tptTx{
+  margin: 4px 0 14px;
+  padding: 12px;
+  border: 1px solid rgba(15,23,42,.10);
+  border-radius: 14px;
+  background: #FCFDFE;
+}
+
+#orderTapete .tptTx__title{
+  font-size: 13.5px;
+  font-weight: 900;
+  color: #0B0F14;
+}
+
+#orderTapete .tptTx__sub{
+  margin-top: 3px;
+  margin-bottom: 10px;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: #5B6472;
+}
+
+#orderTapete .tptTx__row{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+#orderTapete .tptTx__opt{
+  border: 2px solid rgba(15,23,42,.10);
+  border-radius: 12px;
+  padding: 6px;
+  background: #fff;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color .15s ease, transform .12s ease;
+}
+
+#orderTapete .tptTx__opt:hover{ transform: translateY(-1px); }
+
+#orderTapete .tptTx__opt.is-active{
+  border-color: #F5B301;
+  background: #FFFDF6;
+}
+
+#orderTapete .tptTx__media{
+  position: relative;
+  border-radius: 9px;
+  overflow: hidden;
+  background: #F2F4F8;
+}
+
+#orderTapete .tptTx__media img{
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+#orderTapete .tptTx__check{
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #F5B301;
+  color: #fff;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 900;
+  opacity: 0;
+  transform: scale(.9);
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+#orderTapete .tptTx__opt.is-active .tptTx__check{ opacity: 1; transform: scale(1); }
+
+#orderTapete .tptTx__name{
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #0B0F14;
+}
+
+#orderTapete .tptTx__zoom{
+  margin-top: 4px;
+  padding: 4px 10px;
+  border: 1px solid rgba(245,179,1,.40);
+  border-radius: 999px;
+  background: #FFF8E6;
+  color: #8a6400;
+  font-family: inherit;
+  font-size: 10.5px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+#orderTapete .tptTx__zoom:hover{ background: #F5B301; color: #fff; }
+
+@media (max-width: 340px){
+  #orderTapete .tptTx__row{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* =========================================================
+   TEXTURA OBRIGATÓRIA — estado de erro inline (sem alert)
+========================================================= */
+.tptTx.is-invalid{
+  border: 1px solid rgba(245,179,1,.55);
+  background: rgba(245,179,1,.06);
+  border-radius: 12px;
+  padding: 12px;
+}
+.tptTx.is-invalid .tptTx__opt .tptTx__media{
+  outline: 1px solid rgba(245,179,1,.35);
+  outline-offset: 2px;
+}
+.tptTx__erro{
+  margin: 10px 0 0;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #B88600;
+}
+
+/* =========================================================
+   VÍDEOS DENTRO DO BLOCO DE PRODUTO
+   #veja-na-pratica passou para dentro de .tpt__wrap (que tem
+   coluna estreita). Sem isto os 3 cards ficam ~100px no desktop.
+   Escapa da coluna e centraliza na viewport, sem tocar no JS.
+========================================================= */
+.tapeteProduct #veja-na-pratica{
+  width: min(1100px, 100vw - 32px);
+  margin-left: 50%;
+  transform: translateX(-50%);
+  max-width: none;
+}
+@media (max-width: 560px){
+  .tapeteProduct #veja-na-pratica{
+    width: calc(100vw - 32px);
+  }
+}
+
+/* =========================================================
+   MODAL — coerencia com a linguagem da LP
+   A LP ensina 3 coisas: titulo e Barlow Condensed, selecionado
+   e borda ambar #F5B301 sobre creme, e painel tem raio 18 com
+   respiro 18/16. O modal falava outra lingua. Aqui ele passa a
+   falar a mesma.
+========================================================= */
+
+/* 1. Titulo do bloco de textura entra na voz de titulo da pagina */
+#confirmModal .tptTx__title{
+  font-family: "Barlow Condensed", system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: .2px;
+  text-transform: uppercase;
+  color: var(--text, #0B0F14);
+}
+
+#confirmModal .tptTx__sub{
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--muted, #5B6472);
+}
+
+/* 2. O bloco ganha o respiro e o raio dos paineis da LP */
+#confirmModal .tptTx{
+  padding: 18px 16px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid rgba(15,23,42,.10);
+}
+
+/* 3. Selecionar textura passa a usar o mesmo vocabulario do card de kit:
+      borda ambar sobre fundo creme, com um leve halo. */
+#confirmModal .tptTx__opt{
+  border-radius: 14px;
+  border: 2px solid rgba(15,23,42,.10);
+  background: #fff;
+  padding: 8px;
+  transition: border-color .16s ease, background-color .16s ease, box-shadow .16s ease;
+}
+
+#confirmModal .tptTx__opt:hover{
+  border-color: rgba(245,179,1,.45);
+}
+
+#confirmModal .tptTx__opt.is-active{
+  border-color: #F5B301;
+  background: #FFFDF6;
+  box-shadow: 0 0 0 3px rgba(245,179,1,.18);
+}
+
+#confirmModal .tptTx__name{
+  font-family: "Barlow Condensed", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+}
+
+#confirmModal .tptTx__opt.is-active .tptTx__name{ color: #8a6400; }
+
+/* 4. Botoes do rodape com o raio do CTA principal (14, nao 12) */
+#confirmModal .btnPrimary,
+#confirmModal .btnGhost{ border-radius: 14px; }
+
+/* 5. Estado de erro da textura, na mesma familia visual */
+#confirmModal .tptTx.is-invalid{
+  border-color: rgba(220,38,38,.45);
+  box-shadow: 0 0 0 3px rgba(220,38,38,.10);
+}
+
+#confirmModal .tptTx__erro{
+  margin: 10px 0 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #b91c1c;
+}
+
+/* =========================================================
+   CONVERSAO v1 — AMBAR VIRA COR EXCLUSIVA DE ACAO
+   Antes: 29 preenchimentos ambar na pagina, so 2 eram botao.
+   O olho nao achava a acao porque a cor da acao estava em todo
+   lugar. Aqui o ambar sai de tudo que nao clica.
+========================================================= */
+
+/* --- topbar deixa de competir: tinta com texto ambar, sem animacao --- */
+.topbar{ background:#0B0F14 !important; }
+.topbar__track{ animation: topbarScroll 30s linear infinite; }
+.topbar__sep{ color:#C08C00; margin:0 14px; font-size:11px; }
+.topbar__item{ color:#F5B301 !important; font-size:13px; }
+.topbar__logo{ display:none; }
+
+/* --- acentos decorativos descem para ambar escuro (contraste real) --- */
+.hero__stars,
+.reviews__stars,
+.review__stars,
+.nxSat__badgeStars{ color:#C08C00 !important; }
+.hero__accent{ color:#C08C00 !important; }
+
+/* --- divisores e filetes viram tinta --- */
+.benefits__title::after,
+.footer__line{ background:#0B0F14 !important; }
+
+/* --- checklist: fundo creme, icone tinta (era 3,07:1) --- */
+.checkIcon{
+  background:#FFF8E6 !important;
+  color:#0B0F14 !important;
+  border-color:rgba(184,134,0,.35) !important;
+}
+
+/* --- badges do kit deixam de ser ambar solido --- */
+.tapeteProduct .tptKitCard__badge{
+  background:#0B0F14; color:#fff; font-size:11px;
+}
+.tapeteProduct .tptKitCard__badge--soft{
+  background:#FFF8E6; color:#0B0F14;
+  border:1px solid rgba(184,134,0,.35);
+}
+
+/* --- o preco para de disputar massa de cor com o botao --- */
+.tapeteProduct .tptPrice__main,
+.tapeteProduct .tptKitCard__now{ color:#0B0F14 !important; }
+
+/* =========================================================
+   TOKEN UNICO DE ACAO
+   23px nao e estetica: Barlow Condensed rende 0,688 da largura
+   do Inter no mesmo corpo. 16 / 0,688 = 23,3.
+========================================================= */
+.gdcCta,
+.tapeteProduct .tptBuy,
+a.gdcCta:link, a.gdcCta:visited{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:2px; width:100%; min-height:60px; padding:14px 18px;
+  border:0; border-radius:14px;
+  background:#F5B301; color:#0B0F14;
+  font-family:"Barlow Condensed", system-ui, sans-serif;
+  font-weight:800; font-size:21px; line-height:1.05; letter-spacing:.04em;
+  text-align:center; text-decoration:none; cursor:pointer;
+  box-shadow:0 14px 30px rgba(245,179,1,.28);
+}
+.gdcCta:hover{ filter:brightness(1.04); }
+.gdcCta:active{ transform:scale(.99); }
+.gdcCta:focus-visible{ outline:3px solid #0B0F14; outline-offset:3px; }
+
+.tapeteProduct .tptBuy__sub{
+  font-family:Inter, system-ui, sans-serif;
+  font-weight:600; font-size:12px; letter-spacing:0; text-transform:none;
+  color:#0B0F14; opacity:.78;
+}
+
+.tapeteProduct .tptBuy{ animation:ctaPulseAmber 2.4s ease-in-out infinite; }
+@keyframes ctaPulseAmber{
+  0%,100%{ transform:scale(1);    box-shadow:0 14px 30px rgba(245,179,1,.28); }
+  50%    { transform:scale(1.015); box-shadow:0 18px 40px rgba(245,179,1,.46); }
+}
+@media (prefers-reduced-motion: reduce){
+  .tapeteProduct .tptBuy{ animation:none; }
+}
+
+/* --- botoes herdados do modal, sticky e drawer entram no mesmo token --- */
+.btnPrimary, .btnPrimary:hover, .btnPrimary:active,
+.mobileStickyCta{
+  background:#F5B301 !important; color:#0B0F14 !important;
+  border-color:transparent !important;
+  box-shadow:0 12px 26px rgba(245,179,1,.28) !important;
+}
+.mobileStickyCta__text{ color:#0B0F14; font-size:17px; }
+.drawer__cta{ background:#F5B301 !important; color:#0B0F14 !important; }
+
+/* --- verde passa a significar UMA coisa: confirmacao --- */
+.tapeteProduct .tptStepCheck,
+.tapeteProduct .tptResult__ok{ color:#15803D; }
+
+/* --- ultimos ambares que nao clicam --- */
+.hdr__divider{ background:rgba(11,15,20,.10) !important; }
+.hero.hero--premium .hero__eyebrow{ background:#FFF8E6 !important; color:#0B0F14 !important; }
+.tapeteProduct .tptStepNum{ background:#0B0F14 !important; color:#fff !important; }
+.benefits__dots .dot.is-active,
+.reviews__dots .dot.is-active{ background:#0B0F14 !important; }
+.trustPill{ background:#FFF8E6 !important; }
+.hdr__menuBtn span{ background:#0B0F14 !important; }
+
+/* =========================================================
+   CONVERSAO v1 — SUPERFICIES DE COMPRA E ERRO SEM alert()
+========================================================= */
+
+/* CTA que fecha cada secao de prova */
+.gdcCta--secao{
+  max-width: 560px;
+  margin: 22px auto 4px;
+}
+
+/* campo que falta ganha destaque em vez de popup do navegador */
+.tapeteProduct .tptField.is-invalid select{
+  border-color: #B88600;
+  box-shadow: 0 0 0 3px rgba(245,179,1,.25);
+}
+.tapeteProduct .tptResult__erro{
+  padding: 10px 12px; border-radius: 12px;
+  background: #FFF8E6; border: 1px solid rgba(184,134,0,.35);
+  color: #0B0F14; font-size: 13px; line-height: 1.45;
+}
+
+/* fechamento depois do FAQ */
+.faqClose{ margin: 26px auto 0; max-width: 560px; text-align: center; }
+.faqClose__txt{
+  margin: 0 0 4px; font-size: 14px; line-height: 1.5; color: #5B6472;
+}
+
+/* o sticky so existe quando liberado */
+.mobileStickyCta{ transition: transform .18s ease, opacity .18s ease; }
+
+/* =========================================================
+   MENU LATERAL — deixa de ser lista de cartoes brancos
+   Os links viravam botoes por causa de border + radius. Menu
+   nao e botao: e tipografia. O painel entra na linguagem da
+   barra de avisos e da arte do produto.
+========================================================= */
+.drawer__panel{
+  background: #0B0F14 !important;
+  color: #fff;
+  display: flex; flex-direction: column;
+  padding: 18px 20px 22px !important;
+}
+
+.drawer__top{
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(245,179,1,.22);
+}
+.drawer__logo{ height: 30px; width: auto; }
+
+.drawer__close{
+  width: 40px; height: 40px; flex: 0 0 40px;
+  display: grid; place-items: center;
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  border-radius: 10px;
+  color: #F5B301 !important;
+  font-size: 24px; line-height: 1; cursor: pointer;
+}
+.drawer__close:hover{ border-color: rgba(245,179,1,.5) !important; }
+
+.drawer__nav{ display: flex; flex-direction: column; padding: 6px 0; }
+
+/* tipografia, nao cartao */
+.drawer__link{
+  display: block;
+  padding: 17px 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,.08) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #fff !important;
+  font-family: "Barlow Condensed", system-ui, sans-serif;
+  font-size: 27px; font-weight: 700; letter-spacing: .02em;
+  text-transform: uppercase; text-decoration: none;
+  transition: color .15s ease, padding-left .15s ease;
+}
+.drawer__link:hover,
+.drawer__link:focus-visible{ color: #F5B301 !important; padding-left: 6px !important; }
+.drawer__link:last-child{ border-bottom: 0 !important; }
+
+.drawer__footer{ margin-top: auto; padding-top: 18px; }
+.drawer__note{
+  margin: 10px 0 0; text-align: center;
+  font-size: 12px; color: rgba(255,255,255,.55);
+}
+
+/* selo de compra segura: o mesmo arquivo que o checkout usa,
+   para o cliente reconhecer a mesma loja nas duas telas */
+.hdr__seal{
+  width: clamp(64px, 17vw, 82px);
+  height: auto;
+  display: block;
+  opacity: .85;
+}
+
+/* =========================================================
+   CTA — uma medida so, em qualquer contexto
+   Estavam saindo 282, 335, 343 e 375px conforme o padding do
+   contexto, e os de 375 encostavam na borda da tela.
+========================================================= */
+.gdcCta,
+.tapeteProduct .tptBuy{
+  min-height: 56px;
+  padding: 13px 20px;
+  font-size: 21px;
+  box-sizing: border-box;
+  width: auto;                 /* deixa de esticar cegamente */
+  align-self: stretch;
+}
+
+/* o CTA que fecha secao: respiro garantido e largura util.
+   Precisa de (0,2,1) para vencer 'a.gdcCta:link' do bloco do token. */
+a.gdcCta.gdcCta--secao,
+a.gdcCta.gdcCta--secao:link,
+a.gdcCta.gdcCta--secao:visited,
+.gdcCta--secao{
+  display: block;
+  width: 100%;
+  max-width: min(420px, 100vw - 32px);
+  margin: 22px auto 4px;
+  padding: 15px 20px;
+  line-height: 1.05;
+}
+
+/* o botao principal tem duas linhas, entao respira um pouco mais */
+.tapeteProduct .tptBuy{
+  width: 100%;
+  min-height: 64px;
+  padding: 12px 20px;
+}
+
+/* =========================================================
+   BARRA DE CONFIANCA — conserto do meu proprio estrago
+   Na de-amberizacao troquei o fundo da pilula de ambar para creme,
+   mas o texto e o icone eram brancos, feitos para o fundo ambar.
+   Ficou 1,06:1 de contraste, ou seja, invisivel.
+========================================================= */
+.trustPill{
+  background: #FFF8E6 !important;
+  border: 1px solid rgba(184,134,0,.28) !important;
+  box-shadow: none !important;
+}
+.trustPill__h{ color: #0B0F14 !important; }
+.trustPill__p{ color: #5B6472 !important; }
+
+/* o icone estava invertido para branco; volta ao natural */
+.trustPill__icon{
+  filter: none !important;
+  opacity: .9;
+}
+
+/* =========================================================
+   AMBAR NAO SERVE DE TINTA
+   #F5B301 sobre branco da 1,85:1. Ele foi feito para ser fundo.
+   Onde precisa ser texto, usa #8A6400: 5,38:1 no branco e
+   5,08:1 no creme, e continua lendo como dourado da marca.
+========================================================= */
+.nxShip__free,
+.counter__plus,
+.tptPanel__accent,
+.sp-icon,
+.macena-social-proof .product,
+.tptKit__note,
+.statCard__star,
+.hero__stars,
+.reviews__stars,
+.review__stars,
+.faq__question::after{
+  color: #8A6400 !important;
+}
+
+/* iniciais do avatar estavam branco sobre branco: 1:1 */
+.reviewAvatar{
+  background: #0B0F14 !important;
+  color: #fff !important;
+}
+
+/* economia do kit: verde sobre verde clarinho dava 1,52:1 */
+.tapeteProduct .tptKitCard__save{
+  background: #EAF6EE !important;
+  color: #14532D !important;
+}
+
+/* horario da notificacao flutuante */
+.macena-social-proof .sp-text p[style]{ color: #5B6472 !important; }
+
+/* ultimos textos abaixo do minimo */
+.verified{ color: #5B6472 !important; }
+.macena-social-proof .sp-text p{ color: #5B6472 !important; }
+.macena-social-proof .sp-quando{ font-size: .7em; color: #5B6472; margin-top: 2px; }
+.reviews__footerScore .reviews__stars{ color: #7A5800 !important; }
+.footer__bottom span{ color: rgba(255,255,255,.72) !important; }
+
+/* =========================================================
+   BARRA DE CONFIANCA — faixa escura, como foi desenhada
+   Os icones sao arte 100% BRANCA em png transparente: existem
+   para viver sobre fundo escuro. Eu tinha trocado so o fundo
+   da pilula e deixado texto e icone orfaos, o que apagou os
+   dois. Aqui a secao inteira vira faixa tinta: os ativos
+   voltam a funcionar como foram feitos e o contraste sobe.
+========================================================= */
+.trustbar{
+  background: #0B0F14 !important;
+  padding: 18px 0 !important;
+}
+.trustbar .trustPill,
+.trustbar__track .trustPill,
+article.trustPill{
+  background: rgba(255,255,255,.06) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  border-radius: 14px !important;
+  padding: 12px 16px !important;
+  box-shadow: none !important;
+}
+.trustbar .trustPill__h{ color: #fff !important; font-weight: 700; }
+.trustbar .trustPill__p{ color: rgba(255,255,255,.68) !important; }
+.trustbar .trustPill__icon{ filter: none !important; opacity: 1 !important; }
+
+/* header com mais respiro vertical */
+.hdr .hdr__inner{ padding: 20px 16px !important; }
+
+/* =========================================================
+   TEMA DA MARCA — trocar aqui muda a loja inteira
+   Ambar e verde exigem cores de TEXTO opostas sobre a cor
+   principal, entao --marca-contraste faz parte do tema.
+   Para trocar: <html data-tema="verde"> ou data-tema="ambar"
+========================================================= */
+/* O ambar precisa do seu proprio seletor: com o vermelho redefinindo
+   :root mais abaixo, um bloco so de :root aqui perderia por ordem.
+   html[data-tema="ambar"] e (0,1,1) e ganha de :root (0,1,0). */
+:root,
+html[data-tema="ambar"]{
+  --marca:           #F5B301;   /* fundo de acao */
+  --marca-escura:    #C08C00;   /* hover, sombra */
+  --marca-tinta:     #8A6400;   /* a marca quando vira TEXTO (5,38:1) */
+  --marca-suave:     #FFF8E6;   /* fundo suave */
+  --marca-borda:     rgba(184,134,0,.35);
+  --marca-halo:      rgba(245,179,1,.28);
+  --marca-contraste: #0B0F14;   /* texto SOBRE a cor da marca (10,37:1) */
+}
+
+/* Os tokens antigos passam a apontar para o tema. Assim as 6076 linhas
+   de CSS legado seguem a troca sozinhas, sem eu caçar regra por regra.
+   (--red e --nx-red sao heranca da marca vermelha original) */
+:root,
+html[data-tema="vermelho"],
+html[data-tema="verde"]{
+  --accent:        var(--marca);
+  --accent-dark:   var(--marca-escura);
+  --red:           var(--marca);
+  --red-dark:      var(--marca-escura);
+  --red-soft:      var(--marca-suave);
+  --nx-red:        var(--marca);
+  --tpt-accent:    var(--marca);
+  --tpt-accent-d:  var(--marca-escura);
+  --tpt-soft:      var(--marca-suave);
+}
+
+/* Vermelho: e a cor da LP que o socio mandou. Virou o padrao da loja,
+   entao o :root la em cima tambem aponta para ele.
+   #E2231A sobre branco da 4,68:1 e branco sobre ele da os mesmos 4,68:1 —
+   ao contrario do ambar, o vermelho passa nos dois sentidos. Mesmo assim
+   --marca-tinta usa #B5160F (6,81:1) para texto pequeno.                 */
+:root,
+html[data-tema="vermelho"]{
+  --marca:           #E2231A;
+  --marca-escura:    #B5160F;
+  --marca-tinta:     #B5160F;
+  --marca-suave:     #FEF2F2;
+  --marca-borda:     rgba(181,22,15,.30);
+  --marca-halo:      rgba(226,35,26,.28);
+  --marca-contraste: #FFFFFF;
+}
+
+html[data-tema="verde"]{
+  --marca:           #047857;
+  --marca-escura:    #035E45;
+  --marca-tinta:     #024C3A;   /* 10,01:1 sobre branco */
+  --marca-suave:     #D1FAE5;
+  --marca-borda:     rgba(2,76,58,.30);
+  --marca-halo:      rgba(4,120,87,.30);
+  --marca-contraste: #FFFFFF;   /* 5,48:1 sobre o verde */
+}
+
+/* ---------- superficies de acao ---------- */
+.gdcCta,
+.tapeteProduct .tptBuy,
+a.gdcCta:link, a.gdcCta:visited,
+.btnPrimary, .btnPrimary:hover, .btnPrimary:active,
+.mobileStickyCta,
+.drawer__cta{
+  background: var(--marca) !important;
+  color: var(--marca-contraste) !important;
+  box-shadow: 0 14px 30px var(--marca-halo) !important;
+}
+.mobileStickyCta__text,
+.tapeteProduct .tptBuy__sub{ color: var(--marca-contraste); }
+
+@keyframes ctaPulseAmber{
+  0%,100%{ transform:scale(1);     box-shadow:0 14px 30px var(--marca-halo); }
+  50%    { transform:scale(1.015); box-shadow:0 18px 40px var(--marca-halo); }
+}
+
+/* ---------- a marca como texto ---------- */
+.topbar__item,
+.nxShip__free,
+.counter__plus,
+.tptPanel__accent,
+.sp-icon,
+.macena-social-proof .product,
+.tptKit__note,
+.statCard__star,
+.hero__stars,
+.reviews__stars,
+.review__stars,
+.hero__accent{ color: var(--marca-tinta) !important; }
+
+.topbar__item{ color: var(--marca) !important; }   /* sobre tinta, o vivo funciona */
+.topbar__sep{ color: var(--marca-escura) !important; }
+
+/* ---------- fundos suaves e bordas ---------- */
+.hero.hero--premium .hero__eyebrow,
+.heroOffer__badge,
+.checkIcon,
+.tapeteProduct .tptKitCard__badge--soft,
+.tapeteProduct .tptResult__erro{
+  background: var(--marca-suave) !important;
+  border-color: var(--marca-borda) !important;
+}
+
+/* ---------- estado selecionado ---------- */
+.tapeteProduct .tptKitCard.is-selected,
+#confirmModal .tptTx__opt.is-active,
+#orderTapete .tptTx__opt.is-active{
+  border-color: var(--marca) !important;
+  background: var(--marca-suave) !important;
+}
+#confirmModal .tptTx__opt.is-active{ box-shadow: 0 0 0 3px var(--marca-halo) !important; }
+
+/* ---------- menu lateral ---------- */
+.drawer__top{ border-bottom-color: var(--marca-borda) !important; }
+.drawer__close{ color: var(--marca) !important; }
+.drawer__link:hover,
+.drawer__link:focus-visible{ color: var(--marca) !important; }
+
+/* logo Tapecar: 4,17:1 depois de tirar a margem transparente.
+   O antigo era 4,4:1 a 30px de altura = 106px de largura. Aqui a
+   altura sobe para a marca ocupar largura equivalente no header. */
+.hdr .hdr__logo{ height: 34px !important; width: auto !important; }
+.drawer__logo{ height: 36px; width: auto; }
+.footer__logo{ height: 40px; width: auto; }
+
+/* =========================================================
+   ULTIMOS AMBARES QUE NAO SEGUIAM O TEMA
+   29 elementos ficavam ambar no tema verde. Todos passam a
+   usar os tokens da marca.
+========================================================= */
+
+/* miniatura ativa da galeria */
+.tapeteProduct .tptGallery__thumb.is-active{
+  border-color: var(--marca) !important;
+}
+
+/* nota acima dos kits */
+.tapeteProduct .tptKit__note{
+  background: var(--marca-suave) !important;
+  border-color: var(--marca-borda) !important;
+  color: var(--marca-tinta) !important;
+}
+
+/* campo em foco: era o anel ambar no "Selecione a marca" */
+.tapeteProduct .tptField select:focus,
+.tapeteProduct .tptField select:focus-visible{
+  border-color: var(--marca) !important;
+  box-shadow: 0 0 0 3px var(--marca-halo) !important;
+  outline: none !important;
+}
+
+/* bolinha de cor selecionada */
+.tapeteProduct .tptColorBtn.is-selected{
+  border-color: var(--marca) !important;
+  box-shadow: 0 0 0 3px var(--marca-halo) !important;
+}
+
+/* icones das especificacoes — os 20 svg herdam currentColor daqui */
+.specCard__icon{
+  color: var(--marca-tinta) !important;
+  background: var(--marca-suave) !important;
+  border-color: var(--marca-borda) !important;
+}
+.specCard__icon svg,
+.specCard__icon path{ stroke: currentColor; }
+
+/* barra de avisos: texto branco. Sobre a tinta #0B0F14 da 18,4:1,
+   contra 5,5:1 do verde e 10,4:1 do ambar — e nao muda com o tema. */
+.topbar__item{ color: #FFFFFF !important; }
+.topbar__sep{ color: var(--marca) !important; opacity: .9; }
+
+/* pseudo-elementos que a varredura anterior nao pegava */
+.faq__question::after{ color: var(--marca-tinta) !important; }
+.vPlay__title::after,
+.vHero__title::after,
+.benefits__title::after,
+.checks__title::after,
+.material__title::after,
+.specs__title::after,
+.reviews__title::after,
+.faq__title::after{ background: var(--marca) !important; }
+.reviews__footerScore .reviews__stars{ color: var(--marca-tinta) !important; }
+
+/* =========================================================
+   CHECKOUT, PIX E OBRIGADO seguem o tema da loja
+   Estas paginas carregam este arquivo DEPOIS do checkout.css,
+   entao redefinir os tokens aqui basta — sem !important e sem
+   tocar em uma linha da logica de pagamento.
+========================================================= */
+:root,
+html[data-tema="vermelho"],
+html[data-tema="ambar"],
+html[data-tema="verde"]{
+  --cko-accent:        var(--marca);
+  --cko-accent-deep:   var(--marca-escura);
+  --cko-emerald:       var(--marca);
+  --cko-modern-green:  var(--marca);
+  --cko-bar-2:         var(--marca);
+  --cko-pix-tag-text:  var(--marca);
+  --cko-font:          Inter, system-ui, sans-serif;
+  --cko-font-display:  "Barlow Condensed", system-ui, sans-serif;
+}
+
+/* o botao do checkout entra na mesma regra de contraste da LP:
+   sobre ambar o texto e tinta, sobre verde e branco */
+.cko-btn-primary,
+.cko-btn--primary,
+button[class*="cko"][class*="primary"]{
+  background: var(--marca) !important;
+  color: var(--marca-contraste) !important;
+  border-color: transparent !important;
+}
+
+/* titulos do checkout na voz de titulo da marca */
+.cko-main h1, .cko-main h2, .cko-main h3,
+.cko-summary h2, .cko-summary h3,
+.cko-step-title{
+  font-family: var(--cko-font-display);
+  font-weight: 800;
+  letter-spacing: .01em;
+}
+
+/* --- ambares fixos que sobraram dentro do checkout.css --- */
+
+/* foco do campo: era borda + halo ambar chumbados */
+.cko-field input:focus,
+.cko-field select:focus,
+.cko-field textarea:focus{
+  border-color: var(--marca) !important;
+  box-shadow: 0 0 0 3px var(--marca-halo) !important;
+}
+
+/* estrelas da prova social */
+.cko-estrelas{ color: var(--marca-tinta) !important; }
+
+/* links com filete inferior, no corpo e no rodape */
+.cko-beneficio-texto a,
+.cko-footer-policies a{ border-bottom-color: var(--marca-borda) !important; }
+.cko-beneficio-texto a:hover,
+.cko-footer-policies a:hover,
+.cko-footer-policies a:focus-visible{
+  color: var(--marca) !important;
+  border-bottom-color: var(--marca) !important;
+}
+
+/* ============================================================================
+   BOTOES SEM COR PROPRIA — o azul do iOS
+   ---------------------------------------------------------------------------
+   No Safari do iPhone, um <button> que nao declara `color` nao herda a cor do
+   texto em volta: ele cai no azul de sistema (#007AFF). No Chrome do desktop o
+   padrao e preto, por isso o problema so aparecia no celular.
+
+   Sao estes os botoes da LP que nunca declararam cor:
+     .modal__close   -> o X do "Revise seu pedido"
+     .txZoom__x      -> o X do lightbox de textura
+     .btnGhost       -> "Voltar e ajustar"
+     .hdr__menuBtn / .tptGallery__* -> sem texto hoje, travados por seguranca
+
+   Os botoes do checkout e do pix ja declaram cor e ficam de fora de proposito.
+   ========================================================================== */
+.modal__close,
+.txZoom__x,
+.btnGhost,
+.hdr__menuBtn,
+.tptGallery__main,
+.tptGallery__thumb{
+  color: var(--tpt-ink, #0B0F14);
+  -webkit-text-fill-color: currentColor;
+}
+
+/* area de toque decente para os dois X, que hoje sao alvos de 38px */
+.modal__close,
+.txZoom__x{
+  font-weight: 700;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
