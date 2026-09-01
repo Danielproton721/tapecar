@@ -1166,17 +1166,17 @@ html[data-tema="verde"]{
 
 /* Vermelho: e a cor da LP que o socio mandou. Virou o padrao da loja,
    entao o :root la em cima tambem aponta para ele.
-   #E2231A sobre branco da 4,68:1 e branco sobre ele da os mesmos 4,68:1 —
+   #7C3AED sobre branco da 4,68:1 e branco sobre ele da os mesmos 4,68:1 —
    ao contrario do ambar, o vermelho passa nos dois sentidos. Mesmo assim
-   --marca-tinta usa #B5160F (6,81:1) para texto pequeno.                 */
+   --marca-tinta usa #5B21B6 (6,81:1) para texto pequeno.                 */
 :root,
 html[data-tema="vermelho"]{
-  --marca:           #E2231A;
-  --marca-escura:    #B5160F;
-  --marca-tinta:     #B5160F;
+  --marca:           #7C3AED;
+  --marca-escura:    #5B21B6;
+  --marca-tinta:     #5B21B6;
   --marca-suave:     #FEF2F2;
-  --marca-borda:     rgba(181,22,15,.30);
-  --marca-halo:      rgba(226,35,26,.28);
+  --marca-borda:     rgba(91, 33, 182,.30);
+  --marca-halo:      rgba(124, 58, 237,.28);
   --marca-contraste: #FFFFFF;
 }
 

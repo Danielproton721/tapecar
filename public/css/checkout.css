@@ -1442,7 +1442,7 @@ body.cko-booting .cko-footer {
    ========================================================================== */
 
 .cko-footer {
-  background: #E11B22;
+  background: #7C3AED;
   color: #ffffff;
   padding: 28px 20px 32px;
   text-align: center;
@@ -1550,7 +1550,7 @@ body.cko-booting .cko-footer {
   height: 24px;
   margin-right: 9px;
   border-radius: 7px;
-  background: #E11B22;
+  background: #7C3AED;
   color: #ffffff;      /* 4,80:1 sobre o vermelho */
   font-size: 14px;
   font-weight: 700;
@@ -1617,8 +1617,8 @@ body.cko-booting .cko-footer {
                   rebrand. Pintava a faixa logo abaixo do topo.
    ========================================================================== */
 :root{
-  --cko-steps: #E11B22;
-  --cko-bar-2: #E11B22;
+  --cko-steps: #7C3AED;
+  --cko-bar-2: #7C3AED;
 }
 
 /* TOPO BRANCO. Eu tinha escurecido para #0B0F14 lendo errado o print — o
@@ -1645,14 +1645,14 @@ body.cko-booting .cko-footer {
    branco e negrito, colada no topo escuro.
    ========================================================================== */
 .cko-urgencia{
-  background: #E11B22;
+  background: #7C3AED;
   border-bottom: 0;
   padding: 0.85rem 1rem 0.9rem;
   text-align: center;
 }
 
 .cko-urgencia-titulo{
-  color: #ffffff;          /* 4,80:1 sobre #E11B22 */
+  color: #ffffff;          /* 4,80:1 sobre #7C3AED */
   font-size: 0.95rem;
   font-weight: 700;
 }

@@ -600,7 +600,7 @@ a {
    reprova no proprio criterio. Aqui os tres ficam iguais.
    ========================================================================== */
 .pix-footer{
-  background: #E11B22;
+  background: #7C3AED;
   color: #ffffff;
   border-top: 0;
   padding: 28px 20px 32px;
@@ -624,7 +624,7 @@ a {
 
 /* As politicas herdavam rgba(255,255,255,.72), pensado para o rodape escuro
    antigo. Sobre o vermelho isso vira 3,01:1 — reprova para texto pequeno.
-   Branco puro sobre #E11B22 da 4,80:1 e e o que o checkout ja usa. */
+   Branco puro sobre #7C3AED da 4,80:1 e e o que o checkout ja usa. */
 .pix-footer-policies a{ color: #ffffff; }
 
 .pix-footer-policies a:hover,
