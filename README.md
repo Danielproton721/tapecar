@@ -64,18 +64,31 @@ npm run build && npm run start
 | `/obrigado` | pós-compra |
 | `/politica-de-entrega`, `/politica-de-privacidade`, `/termos-de-uso`, `/trocas-e-devolucoes` | páginas legais |
 | `/api/payment/config` | serve a chave pública do gateway (das env vars) |
-| `/api/payment/create` | cria PIX/cartão — **stub, implementar** |
+| `/api/payment/create` | **cria PIX/cartão na Beehive Pay** (implementado — só faltam as chaves) |
 | `/api/cart-abandoned` | carrinho abandonado — stub |
+
+## Gateway Beehive Pay (já integrado)
+
+A cobrança está implementada em `lib/beehive.js` + `app/api/payment/create/route.js`
+(PIX e cartão, `POST https://api.conta.paybeehive.com.br/v1/transactions`, Basic auth).
+Pra ligar, só faltam as chaves nas env vars (ver `.env.example`):
+`PAYMENT_PUBLIC_KEY`, `PAYMENT_SECRET_KEY`, `SITE_URL`. Sem elas, o checkout avisa
+"gateway não configurado" e não cobra nada.
+
+⚠️ **Trava de valor pendente:** o `amount_cents` ainda vem do cliente. A trava real
+(refazer a conta no servidor) exige replicar a tabela de preços + desconto Pix +
+juros de parcela que hoje vivem no JS do front. Está marcado como TODO no route.
 
 ## Antes de rodar tráfego (pendências do dono original)
 
-1. **Pixel do TikTok** — `public/js/tiktok-pixel.js` está com `PIXEL_ID` vazio (o do
+1. **Chaves do gateway** — `PAYMENT_PUBLIC_KEY` + `PAYMENT_SECRET_KEY` na Vercel.
+2. **Webhook** — implementar `/api/payment/webhook` + setar `PAYMENT_WEBHOOK_URL`,
+   senão o PIX não confirma sozinho (Beehive avisa o pagamento por postback).
+3. **Pixel do TikTok** — `public/js/tiktok-pixel.js` está com `PIXEL_ID` vazio (o do
    dono foi removido). Cole o seu id e ajuste `HOSTS_PRODUCAO` pro seu domínio.
-2. **Gateway** — env vars + implementar `/api/payment/create`. **Refaça a conta no
-   servidor** antes de cobrar; nunca confie no `amount_cents` do cliente.
-3. **Dados fiscais** — CNPJ, razão social e `ajuda@tapecar.shop` no rodapé e nas 4
+4. **Dados fiscais** — CNPJ, razão social e `ajuda@tapecar.shop` no rodapé e nas 4
    políticas ainda são do dono original.
-4. **Peso** — `public/media/` são ~22 MB de vídeo. `preload` já é `metadata`/`none`,
+5. **Peso** — `public/media/` são ~22 MB de vídeo. `preload` já é `metadata`/`none`,
    mas vale reencodar antes de escalar.
 
 ## Prova social (popup "comprou agora")
