@@ -2,7 +2,7 @@ import LegacyPage from "../_components/LegacyPage";
 import { legacyBody } from "@/lib/legacy";
 
 export const metadata = {
-  title: "Termos de Uso | CarTap",
+  title: "Termos de Uso | RodaLux",
   description: "Condições de uso do site, características do produto, compatibilidade, pagamento, checkout e garantia.",
 };
 

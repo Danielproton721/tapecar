@@ -2,7 +2,7 @@ import LegacyPage from "../_components/LegacyPage";
 import { legacyBody } from "@/lib/legacy";
 
 export const metadata = {
-  title: "Política de Entrega | CarTap",
+  title: "Política de Entrega | RodaLux",
   description: "Frete, prazo de entrega, rastreamento e o que fazer em caso de atraso ou problema na entrega.",
 };
 

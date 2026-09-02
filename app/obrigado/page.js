@@ -2,8 +2,8 @@ import LegacyPage from "../_components/LegacyPage";
 import { legacyBody } from "@/lib/legacy";
 
 export const metadata = {
-  title: "Pedido confirmado | CarTap",
-  description: "Pedido confirmado — CarTap.",
+  title: "Pedido confirmado | RodaLux",
+  description: "Pedido confirmado — RodaLux.",
 };
 
 export default function Obrigado() {

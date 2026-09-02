@@ -2,8 +2,8 @@ import LegacyPage from "../_components/LegacyPage";
 import { legacyBody } from "@/lib/legacy";
 
 export const metadata = {
-  title: "Política de Privacidade | CarTap",
-  description: "Como a CarTap coleta, usa, compartilha e protege os dados dos clientes.",
+  title: "Política de Privacidade | RodaLux",
+  description: "Como a RodaLux coleta, usa, compartilha e protege os dados dos clientes.",
 };
 
 export default function PoliticaDePrivacidade() {

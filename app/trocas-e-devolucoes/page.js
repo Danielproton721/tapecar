@@ -2,7 +2,7 @@ import LegacyPage from "../_components/LegacyPage";
 import { legacyBody } from "@/lib/legacy";
 
 export const metadata = {
-  title: "Trocas e Devoluções | CarTap",
+  title: "Trocas e Devoluções | RodaLux",
   description: "Prazo de arrependimento, como solicitar a devolução, restituição de valores e garantia legal de 90 dias.",
 };
 
