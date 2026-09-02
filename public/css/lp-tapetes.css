@@ -5678,6 +5678,27 @@ body{
 }
 .footer-copy{ margin-bottom:0; }
 
+/* Links de política — antes herdavam o azul default do browser (feio) */
+.footer__policies{
+  display:flex; flex-wrap:wrap; align-items:center;
+  gap:4px 0;
+  margin:0 0 18px;
+}
+.footer__policies a{
+  position:relative;
+  padding:3px 15px 3px 0;
+  font-size:13px; font-weight:500;
+  color:rgba(255,255,255,.72);
+  text-decoration:none;
+  transition:color .2s ease;
+}
+.footer__policies a:not(:last-child)::after{
+  content:"·";
+  position:absolute; right:5px; top:50%; transform:translateY(-50%);
+  color:rgba(255,255,255,.28); font-weight:700;
+}
+.footer__policies a:hover{ color:var(--brand); }
+
 /* =====================================================================
    AJUSTES HERO + AVALIAÇÕES
 ===================================================================== */
