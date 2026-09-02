@@ -2,7 +2,7 @@ import LegacyPage from "../_components/LegacyPage";
 import { legacyBody } from "@/lib/legacy";
 
 export const metadata = {
-  title: "Trocas e Devoluções | Tapecar",
+  title: "Trocas e Devoluções | CarTap",
   description: "Prazo de arrependimento, como solicitar a devolução, restituição de valores e garantia legal de 90 dias.",
 };
 

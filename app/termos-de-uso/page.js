@@ -2,7 +2,7 @@ import LegacyPage from "../_components/LegacyPage";
 import { legacyBody } from "@/lib/legacy";
 
 export const metadata = {
-  title: "Termos de Uso | Tapecar",
+  title: "Termos de Uso | CarTap",
   description: "Condições de uso do site, características do produto, compatibilidade, pagamento, checkout e garantia.",
 };
 

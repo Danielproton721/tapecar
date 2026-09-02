@@ -2,8 +2,8 @@ import LegacyPage from "../_components/LegacyPage";
 import { legacyBody } from "@/lib/legacy";
 
 export const metadata = {
-  title: "Finalizar Compra | Tapecar",
-  description: "Checkout seguro Tapecar — finalize seu pedido em 3 etapas.",
+  title: "Finalizar Compra | CarTap",
+  description: "Checkout seguro CarTap — finalize seu pedido em 3 etapas.",
 };
 
 export default function Checkout() {

@@ -2,8 +2,8 @@ import LegacyPage from "../_components/LegacyPage";
 import { legacyBody } from "@/lib/legacy";
 
 export const metadata = {
-  title: "Pagamento Pix | Tapecar",
-  description: "Conclua seu pagamento Pix — Tapecar.",
+  title: "Pagamento Pix | CarTap",
+  description: "Conclua seu pagamento Pix — CarTap.",
 };
 
 export default function Pix() {

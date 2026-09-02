@@ -1,6 +1,6 @@
 export const metadata = {
   metadataBase: new URL("https://www.tapecar.shop"),
-  title: "Tapecar | Tapetes Automotivos Sob Medida",
+  title: "CarTap | Tapetes Automotivos Sob Medida",
   description:
     "Tapetes automotivos tipo bandeja 3D, cortados nas medidas exatas do seu carro. Borda elevada que segura agua e barro. Envio para todo o Brasil.",
   icons: {
@@ -9,8 +9,8 @@ export const metadata = {
   },
   openGraph: {
     type: "website",
-    siteName: "Tapecar",
-    title: "Tapecar | Tapetes Automotivos Sob Medida",
+    siteName: "CarTap",
+    title: "CarTap | Tapetes Automotivos Sob Medida",
     description: "Bandeja 3D com borda elevada, cortada para o seu modelo.",
     url: "https://www.tapecar.shop/tapete-bandeja",
     images: ["/images/socio-hero.webp"],
