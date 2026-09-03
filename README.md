@@ -86,9 +86,12 @@ juros de parcela que hoje vivem no JS do front. Está marcado como TODO no route
    senão o PIX não confirma sozinho (Beehive avisa o pagamento por postback).
 3. **Pixel do TikTok** — `public/js/tiktok-pixel.js` está com `PIXEL_ID` vazio (o do
    dono foi removido). Cole o seu id e ajuste `HOSTS_PRODUCAO` pro seu domínio.
-4. **Dados fiscais** — CNPJ, razão social e `ajuda@tapecar.shop` no rodapé e nas 4
-   políticas ainda são do dono original.
-5. **Peso** — `public/media/` são ~22 MB de vídeo. `preload` já é `metadata`/`none`,
+4. **Dados fiscais** — CNPJ, endereço e e-mail de contato estão como placeholders
+   (`__CNPJ__`, `__ENDERECO__`, `__EMAIL_CONTATO__`) no rodapé e nas 4 políticas.
+   Preencher com os dados da RodaLux antes de publicar.
+5. **Domínio** — trocar `tapecar.shop` dos `canonical`/`og` pelo domínio próprio
+   (`rodalux.com.br`) e apontar `SITE_URL` na Vercel.
+6. **Peso** — `public/media/` são ~22 MB de vídeo. `preload` já é `metadata`/`none`,
    mas vale reencodar antes de escalar.
 
 ## Prova social (popup "comprou agora")
