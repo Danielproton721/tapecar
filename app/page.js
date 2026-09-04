@@ -16,7 +16,7 @@ export default function Home() {
         "https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap",
         "/css/lp-tapetes.css",
       ]}
-      scripts={["/js/tiktok-pixel.js", "/js/lp-tapetes.js"]}
+      scripts={["/js/lp-tapetes.js"]}
     />
   );
 }

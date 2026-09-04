@@ -8,25 +8,6 @@ export const dynamic = "force-dynamic";
 export async function GET(req) {
   const has = (v) => !!(process.env[v] && String(process.env[v]).trim());
 
-  const origin =
-    process.env.SITE_URL ||
-    req.headers.get("origin") ||
-    `https://${req.headers.get("host") || ""}`;
-
-  // Pixel do TikTok vive num arquivo (não em env): busca o JS servido e checa
-  // se o PIXEL_ID foi preenchido.
-  let pixelOk = false;
-  try {
-    const r = await fetch(`${origin}/js/tiktok-pixel.js`, { cache: "no-store" });
-    if (r.ok) {
-      const t = await r.text();
-      const m = t.match(/PIXEL_ID\s*=\s*"([^"]*)"/);
-      pixelOk = !!(m && m[1].trim());
-    }
-  } catch {
-    /* ignora — reporta como não verificável */
-  }
-
   const itens = [
     { grupo: "Pagamento", label: "Chave secreta da Beehive (PAYMENT_SECRET_KEY)", ok: has("PAYMENT_SECRET_KEY"), nivel: "obrigatorio",
       dica: "Processa os pagamentos e alimenta este painel. Beehive → Configurações → Credenciais." },
@@ -38,8 +19,10 @@ export async function GET(req) {
       dica: "Se você está vendo este painel, ela já está configurada." },
     { grupo: "Site", label: "Domínio da loja (SITE_URL)", ok: has("SITE_URL"), nivel: "recomendado",
       dica: "Ex.: https://rodalux.com.br — usado no metadata, canonical e no link do checkout." },
-    { grupo: "Marketing", label: "Pixel do TikTok (tiktok-pixel.js)", ok: pixelOk, nivel: "recomendado",
-      dica: "Cole seu PIXEL_ID em public/js/tiktok-pixel.js e ajuste HOSTS_PRODUCAO pro seu domínio." },
+    { grupo: "Marketing", label: "Google Ads — ID (NEXT_PUBLIC_GOOGLE_ADS_ID)", ok: has("NEXT_PUBLIC_GOOGLE_ADS_ID"), nivel: "recomendado",
+      dica: "ID AW- do Google Ads. Carrega o gtag no site pra rastreio e remarketing." },
+    { grupo: "Marketing", label: "Google Ads — label de conversão (NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL)", ok: has("NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL"), nivel: "recomendado",
+      dica: "Rótulo da conversão de compra. Sem ele a venda não é contada como conversão no Google Ads." },
     { grupo: "Opcional", label: "Gateway (PAYMENT_GATEWAY)", ok: has("PAYMENT_GATEWAY"), nivel: "opcional",
       dica: "Padrão: beehive. Só mude se trocar de gateway." },
     { grupo: "Opcional", label: "Ambiente (PAYMENT_ENV)", ok: has("PAYMENT_ENV"), nivel: "opcional",

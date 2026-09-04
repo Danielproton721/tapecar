@@ -14,7 +14,7 @@ export default function Checkout() {
         "https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap",
         "/css/checkout.css",
       ]}
-      scripts={["/js/tiktok-pixel.js", "/js/analytics.js", "/js/checkout.js"]}
+      scripts={["/js/analytics.js", "/js/checkout.js"]}
     />
   );
 }

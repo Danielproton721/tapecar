@@ -25,6 +25,7 @@ export const viewport = {
 };
 
 import Script from "next/script";
+import GoogleAds from "./_components/GoogleAds";
 
 // Os JS legados (lp-tapetes.js, tema.js) registram tudo dentro de
 // document.addEventListener("DOMContentLoaded", …). No site estático o script
@@ -53,6 +54,7 @@ export default function RootLayout({ children }) {
         <Script id="dom-ready-shim" strategy="beforeInteractive">
           {DOM_READY_SHIM}
         </Script>
+        <GoogleAds />
         {children}
       </body>
     </html>

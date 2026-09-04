@@ -14,7 +14,7 @@ export default function Pix() {
         "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap",
         "/css/pix.css",
       ]}
-      scripts={["/js/tiktok-pixel.js", "/js/analytics.js", "/js/pix.js"]}
+      scripts={["/js/analytics.js", "/js/pix.js"]}
     />
   );
 }

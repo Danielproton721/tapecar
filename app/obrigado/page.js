@@ -1,4 +1,5 @@
 import LegacyPage from "../_components/LegacyPage";
+import AdsConversion from "../_components/AdsConversion";
 import { legacyBody } from "@/lib/legacy";
 
 export const metadata = {
@@ -8,13 +9,16 @@ export const metadata = {
 
 export default function Obrigado() {
   return (
-    <LegacyPage
-      html={legacyBody("obrigado.html")}
-      styles={[
-        "https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap",
-        "/css/checkout.css",
-      ]}
-      scripts={["/js/tiktok-pixel.js", "/js/analytics.js", "/js/obrigado.js"]}
-    />
+    <>
+      <AdsConversion />
+      <LegacyPage
+        html={legacyBody("obrigado.html")}
+        styles={[
+          "https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap",
+          "/css/checkout.css",
+        ]}
+        scripts={["/js/analytics.js", "/js/obrigado.js"]}
+      />
+    </>
   );
 }
