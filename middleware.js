@@ -1,18 +1,18 @@
 import { NextResponse } from "next/server";
 
 /**
- * Protege o painel admin (/admin e /api/admin/*) com Basic Auth.
- * Credenciais nas env vars da Vercel: ADMIN_USER e ADMIN_PASSWORD.
- * Sem elas configuradas, o painel fica BLOQUEADO (nega tudo) — nunca aberto.
+ * Protege o painel admin (/admin e /api/admin/*) com senha.
+ * Só a senha importa: ADMIN_PASSWORD nas env vars da Vercel. O navegador pede
+ * "usuário e senha" (Basic Auth) — deixe o usuário em branco e digite a senha.
+ * Sem ADMIN_PASSWORD definida, o painel fica BLOQUEADO (nega tudo).
  */
 export function middleware(req) {
-  const user = process.env.ADMIN_USER || "";
   const pass = process.env.ADMIN_PASSWORD || "";
 
-  // Sem credenciais definidas => painel trancado (fail-closed).
-  if (!user || !pass) {
+  // Sem senha definida => painel trancado (fail-closed).
+  if (!pass) {
     return new NextResponse(
-      "Painel admin não configurado. Defina ADMIN_USER e ADMIN_PASSWORD nas variáveis de ambiente.",
+      "Painel admin não configurado. Defina ADMIN_PASSWORD nas variáveis de ambiente.",
       { status: 503 }
     );
   }
@@ -25,15 +25,15 @@ export function middleware(req) {
     } catch {
       decoded = "";
     }
+    // aceita qualquer usuário; valida SÓ a senha (parte depois do ":")
     const i = decoded.indexOf(":");
-    const u = i >= 0 ? decoded.slice(0, i) : "";
-    const p = i >= 0 ? decoded.slice(i + 1) : "";
-    if (u === user && p === pass) {
+    const p = i >= 0 ? decoded.slice(i + 1) : decoded;
+    if (p === pass) {
       return NextResponse.next();
     }
   }
 
-  return new NextResponse("Autenticação necessária", {
+  return new NextResponse("Senha necessária", {
     status: 401,
     headers: { "WWW-Authenticate": 'Basic realm="RodaLux Admin", charset="UTF-8"' },
   });

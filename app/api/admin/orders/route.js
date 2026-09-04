@@ -73,17 +73,20 @@ export async function GET() {
     .filter(Boolean)
     .sort((a, b) => Date.parse(b.hora || 0) - Date.parse(a.hora || 0)); // mais recente primeiro
 
-  const nPagos = pedidos.filter((p) => p.pago).length;
-  const faturado = pedidos.filter((p) => p.pago).reduce((s, p) => s + p.valor, 0);
+  const pagosArr = pedidos.filter((p) => p.pago);
+  const pendArr = pedidos.filter((p) => !p.pago);
+  const faturado = pagosArr.reduce((s, p) => s + p.valor, 0);
+  const pendenteTotal = pendArr.reduce((s, p) => s + p.valor, 0);
 
   return Response.json({
     configured: true,
     gateway,
     data: new Date(desde).toISOString(),
     resumo: {
-      pagos: nPagos,
-      pendentes: pedidos.length - nPagos,
+      pagos: pagosArr.length,
+      pendentes: pendArr.length,
       faturado: Number(faturado.toFixed(2)),
+      pendenteTotal: Number(pendenteTotal.toFixed(2)),
     },
     pedidos,
   });
