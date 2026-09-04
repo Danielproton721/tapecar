@@ -1,15 +1,26 @@
 import { NextResponse } from "next/server";
 
 /**
- * Protege o painel admin (/admin e /api/admin/*) com senha.
- * Só a senha importa: ADMIN_PASSWORD nas env vars da Vercel. O navegador pede
- * "usuário e senha" (Basic Auth) — deixe o usuário em branco e digite a senha.
- * Sem ADMIN_PASSWORD definida, o painel fica BLOQUEADO (nega tudo).
+ * Protege o painel admin com uma tela de login PRÓPRIA (só senha, sem usuário).
+ * Em vez do Basic Auth (que mostra usuário + senha no popup do navegador),
+ * usamos um cookie de sessão: /admin/login pede só a senha, /api/admin/login
+ * valida e seta o cookie, e este middleware confere o cookie no resto.
+ * Sem ADMIN_PASSWORD definida, o painel fica trancado.
  */
-export function middleware(req) {
-  const pass = process.env.ADMIN_PASSWORD || "";
+async function sha256hex(s) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+  return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
 
-  // Sem senha definida => painel trancado (fail-closed).
+export async function middleware(req) {
+  const { pathname } = req.nextUrl;
+
+  // Login (página e API) são livres — senão não dá pra autenticar.
+  if (pathname === "/admin/login" || pathname === "/api/admin/login") {
+    return NextResponse.next();
+  }
+
+  const pass = process.env.ADMIN_PASSWORD || "";
   if (!pass) {
     return new NextResponse(
       "Painel admin não configurado. Defina ADMIN_PASSWORD nas variáveis de ambiente.",
@@ -17,26 +28,20 @@ export function middleware(req) {
     );
   }
 
-  const header = req.headers.get("authorization") || "";
-  if (header.startsWith("Basic ")) {
-    let decoded = "";
-    try {
-      decoded = atob(header.slice(6));
-    } catch {
-      decoded = "";
-    }
-    // aceita qualquer usuário; valida SÓ a senha (parte depois do ":")
-    const i = decoded.indexOf(":");
-    const p = i >= 0 ? decoded.slice(i + 1) : decoded;
-    if (p === pass) {
-      return NextResponse.next();
-    }
-  }
+  const token = req.cookies.get("admin_ok")?.value || "";
+  const expected = await sha256hex(pass);
+  if (token === expected) return NextResponse.next();
 
-  return new NextResponse("Senha necessária", {
-    status: 401,
-    headers: { "WWW-Authenticate": 'Basic realm="RodaLux Admin", charset="UTF-8"' },
-  });
+  // Não autenticado: API responde 401; páginas vão pro login.
+  if (pathname.startsWith("/api/")) {
+    return new NextResponse(JSON.stringify({ error: "Não autenticado" }), {
+      status: 401,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+  const url = req.nextUrl.clone();
+  url.pathname = "/admin/login";
+  return NextResponse.redirect(url);
 }
 
 export const config = {

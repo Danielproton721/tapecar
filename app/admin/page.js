@@ -24,6 +24,10 @@ export default function Admin() {
     setErro("");
     try {
       const res = await fetch("/api/admin/orders", { cache: "no-store" });
+      if (res.status === 401) {
+        window.location.href = "/admin/login";
+        return;
+      }
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || `Erro ${res.status}`);
       setDados(json);
@@ -34,6 +38,15 @@ export default function Admin() {
       setCarregando(false);
     }
   }, []);
+
+  async function sair() {
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+    } catch {
+      /* ignora */
+    }
+    window.location.href = "/admin/login";
+  }
 
   useEffect(() => {
     carregar();
@@ -57,6 +70,7 @@ export default function Admin() {
           </p>
         </div>
         <div className="acts">
+          <button className="btn linkbtn" onClick={sair}>Sair</button>
           <a className="btn ghost" href="/admin/config">⚙️ Configuração</a>
           <button className="btn" onClick={carregar} disabled={carregando}>
             {carregando ? "Atualizando…" : "↻ Atualizar"}
@@ -142,6 +156,8 @@ const css = `
   .btn:hover{ background:#6d28d9; } .btn:disabled{ opacity:.6; cursor:default; }
   .btn.ghost{ background:transparent; border:1px solid #3a3a48; color:#c9c9d4; }
   .btn.ghost:hover{ border-color:#7C3AED; color:#fff; }
+  .btn.linkbtn{ background:transparent; color:#8a8a98; padding:10px 10px; }
+  .btn.linkbtn:hover{ color:#f59aa8; }
   .aviso{ background:#2a2118; border:1px solid #7a5c1a; color:#f5d68a; border-radius:10px; padding:14px 16px; font-size:14px; margin-bottom:18px; line-height:1.5; }
   .aviso.erro{ background:#2a1518; border-color:#7a1a2a; color:#f59aa8; }
   .cards{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:26px; }

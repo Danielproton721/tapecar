@@ -10,6 +10,10 @@ export default function ConfigPage() {
     (async () => {
       try {
         const res = await fetch("/api/admin/config-check", { cache: "no-store" });
+        if (res.status === 401) {
+          window.location.href = "/admin/login";
+          return;
+        }
         setConfig(await res.json());
       } catch (e) {
         setErro(e.message);
