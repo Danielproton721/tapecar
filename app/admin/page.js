@@ -19,9 +19,6 @@ export default function Admin() {
   const [carregando, setCarregando] = useState(true);
   const [atualizado, setAtualizado] = useState(null);
 
-  const [config, setConfig] = useState(null);
-  const [mostrarConfig, setMostrarConfig] = useState(false);
-
   const carregar = useCallback(async () => {
     setCarregando(true);
     setErro("");
@@ -37,18 +34,6 @@ export default function Admin() {
       setCarregando(false);
     }
   }, []);
-
-  const abrirConfig = useCallback(async () => {
-    setMostrarConfig((v) => !v);
-    if (!config) {
-      try {
-        const res = await fetch("/api/admin/config-check", { cache: "no-store" });
-        setConfig(await res.json());
-      } catch (e) {
-        setConfig({ erro: e.message, itens: [] });
-      }
-    }
-  }, [config]);
 
   useEffect(() => {
     carregar();
@@ -72,14 +57,12 @@ export default function Admin() {
           </p>
         </div>
         <div className="acts">
-          <button className="btn ghost" onClick={abrirConfig}>⚙️ Configuração</button>
+          <a className="btn ghost" href="/admin/config">⚙️ Configuração</a>
           <button className="btn" onClick={carregar} disabled={carregando}>
             {carregando ? "Atualizando…" : "↻ Atualizar"}
           </button>
         </div>
       </header>
-
-      {mostrarConfig ? <ConfigPanel config={config} /> : null}
 
       {dados && dados.configured === false ? (
         <div className="aviso">
@@ -148,49 +131,14 @@ export default function Admin() {
   );
 }
 
-function ConfigPanel({ config }) {
-  if (!config) return <div className="cfg"><p className="vazio">Verificando configuração…</p></div>;
-  const itens = config.itens || [];
-  const nivelBadge = { obrigatorio: "obrig", recomendado: "recom", opcional: "opc" };
-  const nivelLabel = { obrigatorio: "obrigatório", recomendado: "recomendado", opcional: "opcional" };
-
-  return (
-    <div className="cfg">
-      <div className="cfg__head">
-        <strong>O que falta pro site rodar 100%</strong>
-        {config.pronto ? (
-          <span className="cfg__ok">✅ Tudo essencial configurado</span>
-        ) : (
-          <span className="cfg__warn">⚠️ Faltam {config.faltamObrig} obrigatória(s){config.faltamRec ? `, ${config.faltamRec} recomendada(s)` : ""}</span>
-        )}
-      </div>
-      <ul className="cfg__list">
-        {itens.map((it, i) => (
-          <li key={i} className={it.ok ? "on" : "off"}>
-            <span className="cfg__ic">{it.ok ? "✅" : "❌"}</span>
-            <div className="cfg__body">
-              <div className="cfg__label">
-                {it.label}
-                <span className={"cfg__nivel " + nivelBadge[it.nivel]}>{nivelLabel[it.nivel]}</span>
-              </div>
-              <div className="cfg__dica">{it.dica}</div>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <p className="cfg__foot">Configure na Vercel em <b>Settings → Environment Variables</b> e faça um novo deploy.</p>
-    </div>
-  );
-}
-
 const css = `
   .wrap{ max-width:1000px; margin:0 auto; padding:20px 16px 60px; color:#e7e7ee;
     font-family:Inter,system-ui,-apple-system,sans-serif; background:#0d0d12; min-height:100vh; }
   .top{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:20px; }
   .top h1{ margin:0; font-size:22px; font-weight:800; } .top h1 span{ color:#7C3AED; }
   .sub{ margin:4px 0 0; font-size:13px; color:#9a9aa8; } .sub b{ color:#c9b8f5; text-transform:capitalize; }
-  .acts{ display:flex; gap:8px; }
-  .btn{ background:#7C3AED; color:#fff; border:0; border-radius:10px; padding:10px 16px; font-size:14px; font-weight:600; cursor:pointer; transition:.15s; }
+  .acts{ display:flex; gap:8px; align-items:center; }
+  .btn{ background:#7C3AED; color:#fff; border:0; border-radius:10px; padding:10px 16px; font-size:14px; font-weight:600; cursor:pointer; transition:.15s; text-decoration:none; display:inline-block; }
   .btn:hover{ background:#6d28d9; } .btn:disabled{ opacity:.6; cursor:default; }
   .btn.ghost{ background:transparent; border:1px solid #3a3a48; color:#c9c9d4; }
   .btn.ghost:hover{ border-color:#7C3AED; color:#fff; }
@@ -217,22 +165,5 @@ const css = `
   .tag{ display:inline-block; padding:4px 11px; border-radius:999px; font-size:12px; font-weight:700; white-space:nowrap; }
   .tag--pago{ background:#123524; color:#4ade80; border:1px solid #1f5136; }
   .tag--pend{ background:#33280f; color:#fbbf24; border:1px solid #5a4a1a; }
-  .cfg{ background:#14141c; border:1px solid #2b2b38; border-radius:14px; padding:18px; margin-bottom:22px; }
-  .cfg__head{ display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
-  .cfg__head strong{ font-size:15px; }
-  .cfg__ok{ color:#4ade80; font-size:13px; font-weight:600; }
-  .cfg__warn{ color:#fbbf24; font-size:13px; font-weight:600; }
-  .cfg__list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
-  .cfg__list li{ display:flex; gap:12px; padding:12px; border-radius:10px; background:#1a1a24; border:1px solid #24242f; }
-  .cfg__list li.off{ border-color:#4a2a2a; }
-  .cfg__ic{ font-size:15px; line-height:1.4; flex:0 0 auto; }
-  .cfg__label{ font-weight:600; font-size:14px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-  .cfg__dica{ font-size:12.5px; color:#9a9aa8; margin-top:3px; line-height:1.5; }
-  .cfg__nivel{ font-size:10px; text-transform:uppercase; letter-spacing:.04em; padding:2px 7px; border-radius:999px; font-weight:700; }
-  .cfg__nivel.obrig{ background:#3a1a1a; color:#f87171; }
-  .cfg__nivel.recom{ background:#33280f; color:#fbbf24; }
-  .cfg__nivel.opc{ background:#24242f; color:#9a9aa8; }
-  .cfg__foot{ font-size:12.5px; color:#8a8a98; margin:14px 0 0; }
-  .cfg__foot b{ color:#c9b8f5; }
   @media (max-width:640px){ .cards{ grid-template-columns:repeat(2,1fr); } .card__num{ font-size:22px; } }
 `;
