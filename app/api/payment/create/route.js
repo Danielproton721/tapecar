@@ -1,5 +1,4 @@
 import { createBeehiveTransaction } from "@/lib/beehive";
-import { montarPedidoRastroCode, enviarPedidoRastroCode } from "@/lib/rastrocode";
 
 export const dynamic = "force-dynamic";
 
@@ -82,10 +81,6 @@ export async function POST(req) {
     },
   };
 
-  if (process.env.PAYMENT_WEBHOOK_URL) {
-    body.postbackUrl = process.env.PAYMENT_WEBHOOK_URL;
-  }
-
   if (body.paymentMethod === "pix") {
     body.pix = { expiresInSeconds: Number(p.pix_expires_seconds) || 1800 };
   } else {
@@ -121,19 +116,6 @@ export async function POST(req) {
       pix_expires_at: expiresAt,
       status: bhStatus,
     });
-  }
-
-  // cartão: aprovado na hora → envia o pedido pra RastroCode já aqui (o PIX é
-  // enviado pelo webhook, quando confirma). Reenvio não duplica (transaction_id).
-  if (bhStatus === "paid" || bhStatus === "authorized") {
-    await enviarPedidoRastroCode(
-      montarPedidoRastroCode({
-        orderId: p.order_id || String(transactionId),
-        customer: { name: c.name, email: c.email, phone: c.phone, document: c.cpf || c.document?.number },
-        address: c.address || {},
-        items,
-      })
-    );
   }
 
   return json({

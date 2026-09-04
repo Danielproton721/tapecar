@@ -194,6 +194,7 @@ function showPaid(order) {
       ORDER_KEY,
       JSON.stringify({
         orderId: id,
+        transactionId: order.transactionId,
         total: order.total,
         method: "pix",
         email: order.email || order.customer?.email || "",

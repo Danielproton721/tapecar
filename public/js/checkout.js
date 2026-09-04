@@ -1360,7 +1360,7 @@ function metaUserDataFromForm(form = {}) {
  * ainda foi medida.
  * @param {{orderId?: string, orderTotal?: number, status?: "paid"|"pending"}} [param0]
  */
-function showSuccess({ orderId, orderTotal, status = "paid" } = {}) {
+function showSuccess({ orderId, transactionId, orderTotal, status = "paid" } = {}) {
   markAbandonConverted();
   els.layout.hidden = true;
 
@@ -1372,6 +1372,7 @@ function showSuccess({ orderId, orderTotal, status = "paid" } = {}) {
       ORDER_KEY,
       JSON.stringify({
         orderId: id,
+        transactionId: transactionId || "",
         total: value,
         method: "credit_card",
         email: state.form.email || "",
@@ -1452,6 +1453,7 @@ async function placeOrderCard() {
     trackTikTok("CompletePayment", cardInstallmentTotal(total(), installments), payment.transactionId);
     showSuccess({
       orderId: payment.orderId || String(payment.transactionId),
+      transactionId: payment.transactionId,
       orderTotal: cardInstallmentTotal(total(), installments),
     });
     return;
@@ -1469,6 +1471,7 @@ async function placeOrderCard() {
   // Cartao pendente ainda nao e venda — nada de evento de compra aqui.
   showSuccess({
     orderId: payment.orderId || String(payment.transactionId),
+    transactionId: payment.transactionId,
     orderTotal: cardInstallmentTotal(total(), installments),
     status: "pending",
   });

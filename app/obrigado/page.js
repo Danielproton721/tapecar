@@ -1,5 +1,6 @@
 import LegacyPage from "../_components/LegacyPage";
 import AdsConversion from "../_components/AdsConversion";
+import Rastreio from "../_components/Rastreio";
 import { legacyBody } from "@/lib/legacy";
 
 export const metadata = {
@@ -11,6 +12,7 @@ export default function Obrigado() {
   return (
     <>
       <AdsConversion />
+      <Rastreio />
       <LegacyPage
         html={legacyBody("obrigado.html")}
         styles={[
