@@ -146,6 +146,7 @@ export default function Admin() {
 }
 
 const css = `
+  html,body{ margin:0; background:#0d0d12; }
   .wrap{ max-width:1000px; margin:0 auto; padding:20px 16px 60px; color:#e7e7ee;
     font-family:Inter,system-ui,-apple-system,sans-serif; background:#0d0d12; min-height:100vh; }
   .top{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:20px; }

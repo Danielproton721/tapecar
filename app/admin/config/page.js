@@ -74,6 +74,7 @@ export default function ConfigPage() {
 }
 
 const css = `
+  html,body{ margin:0; background:#0d0d12; }
   .wrap{ max-width:820px; margin:0 auto; padding:20px 16px 60px; color:#e7e7ee;
     font-family:Inter,system-ui,-apple-system,sans-serif; background:#0d0d12; min-height:100vh; }
   .top{ margin-bottom:20px; }

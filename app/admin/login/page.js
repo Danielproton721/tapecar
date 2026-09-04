@@ -57,6 +57,7 @@ export default function Login() {
 }
 
 const css = `
+  html,body{ margin:0; background:#0d0d12; }
   .wrap{ min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px;
     background:#0d0d12; color:#e7e7ee; font-family:Inter,system-ui,-apple-system,sans-serif; }
   .box{ width:100%; max-width:340px; background:#16161f; border:1px solid #24242f; border-radius:16px;
