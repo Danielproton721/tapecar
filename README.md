@@ -63,9 +63,22 @@ npm run build && npm run start
 | `/pix` | tela do QR code Pix |
 | `/obrigado` | pós-compra |
 | `/politica-de-entrega`, `/politica-de-privacidade`, `/termos-de-uso`, `/trocas-e-devolucoes` | páginas legais |
+| `/admin` | **painel de pedidos do dia** (protegido por senha) |
 | `/api/payment/config` | serve a chave pública do gateway (das env vars) |
 | `/api/payment/create` | **cria PIX/cartão na Beehive Pay** (implementado — só faltam as chaves) |
+| `/api/admin/orders` | pedidos do dia da Beehive (protegido) |
 | `/api/cart-abandoned` | carrinho abandonado — stub |
+
+## Painel admin (`/admin`)
+
+Painel só do dono pra acompanhar as vendas do dia: lista única de pedidos com tag
+**Pago/Pendente**, valor, método, gateway, e cards de resumo (pagos, pendentes,
+faturado). Auto-atualiza a cada 30s. Os dados vêm direto da Beehive (sem banco).
+
+**Protegido por Basic Auth (fail-closed):** sem `ADMIN_USER` e `ADMIN_PASSWORD`
+nas env vars, o painel **não abre pra ninguém** (o middleware nega tudo). Defina
+as duas na Vercel + a `PAYMENT_SECRET_KEY` (pros pedidos aparecerem) e acesse
+`seudominio.com/admin` — o navegador pede usuário e senha.
 
 ## Gateway Beehive Pay (já integrado)
 
