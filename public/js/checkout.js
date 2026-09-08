@@ -1640,8 +1640,12 @@ function bindEvents() {
   });
 }
 
-/** Dominios onde o site e a loja de verdade. Mantenha igual ao tiktok-pixel.js. */
-const HOSTS_LOJA = ["tapecar.shop", "www.tapecar.shop"];
+/** Dominios onde o site e a loja de verdade (producao). Qualquer host publico
+ *  entra aqui: fora desta lista, o modo de teste (?demo=1 + ?preco=N) fica ligado
+ *  e permitiria montar um pedido de R$1. Inclui o dominio proprio e o .vercel.app,
+ *  que e publico. Testes com preco arbitrario: usar um preview deploy (URL com
+ *  hash), que nao esta nesta lista. */
+const HOSTS_LOJA = ["rodalux.com", "www.rodalux.com", "rodalux.vercel.app"];
 
 function ehProducao() {
   try {

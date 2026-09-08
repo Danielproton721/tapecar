@@ -97,13 +97,17 @@ juros de parcela que hoje vivem no JS do front. Está marcado como TODO no route
 1. **Chaves do gateway** — `PAYMENT_PUBLIC_KEY` + `PAYMENT_SECRET_KEY` na Vercel.
 2. **Webhook** — implementar `/api/payment/webhook` + setar `PAYMENT_WEBHOOK_URL`,
    senão o PIX não confirma sozinho (Beehive avisa o pagamento por postback).
-3. **Pixel do TikTok** — `public/js/tiktok-pixel.js` está com `PIXEL_ID` vazio (o do
-   dono foi removido). Cole o seu id e ajuste `HOSTS_PRODUCAO` pro seu domínio.
-4. **Dados fiscais** — o e-mail de contato já está preenchido (`contato@rodalux.com`).
-   CNPJ e endereço ainda são placeholders (`__CNPJ__`, `__ENDERECO__`) no rodapé e
-   nas 4 políticas. Preencher com os dados da RodaLux antes de publicar.
-5. **Domínio** — trocar `tapecar.shop` dos `canonical`/`og` pelo domínio próprio
-   (`rodalux.com.br`) e apontar `SITE_URL` na Vercel.
+3. **Marketing** — Google Ads via env (`NEXT_PUBLIC_GOOGLE_ADS_ID` +
+   `NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL`). O guard de produção fica em
+   `HOSTS_LOJA` (`public/js/checkout.js`) e já lista `rodalux.com`,
+   `www.rodalux.com` e `rodalux.vercel.app` — fora dele o modo de teste
+   (`?demo=1&?preco=N`) fica ligado. Ajustar se o domínio mudar.
+4. **Dados fiscais** — e-mail (`contato@rodalux.com`), endereço e telefone já estão
+   preenchidos no rodapé. Falta só o **CNPJ** (`__CNPJ__`) — preencher nos 4 arquivos
+   (`lp`, `checkout`, `pix`, `obrigado`) antes de publicar.
+5. **Domínio** — `canonical`/`og`/`metadataBase` já estão em `https://www.rodalux.com`.
+   Falta apontar o DNS do domínio pra Vercel e setar `SITE_URL=https://www.rodalux.com`
+   nas env vars.
 6. **Peso** — `public/media/` são ~22 MB de vídeo. `preload` já é `metadata`/`none`,
    mas vale reencodar antes de escalar.
 

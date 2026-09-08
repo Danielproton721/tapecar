@@ -18,7 +18,7 @@ export async function GET(req) {
     { grupo: "Painel", label: "Senha do painel (ADMIN_PASSWORD)", ok: has("ADMIN_PASSWORD"), nivel: "obrigatorio",
       dica: "Se você está vendo este painel, ela já está configurada." },
     { grupo: "Site", label: "Domínio da loja (SITE_URL)", ok: has("SITE_URL"), nivel: "recomendado",
-      dica: "Ex.: https://rodalux.com.br — usado no metadata, canonical e no link do checkout." },
+      dica: "Ex.: https://www.rodalux.com — usado no metadata, canonical e no link do checkout." },
     { grupo: "Marketing", label: "Google Ads — ID (NEXT_PUBLIC_GOOGLE_ADS_ID)", ok: has("NEXT_PUBLIC_GOOGLE_ADS_ID"), nivel: "recomendado",
       dica: "ID AW- do Google Ads. Carrega o gtag no site pra rastreio e remarketing." },
     { grupo: "Marketing", label: "Google Ads — label de conversão (NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL)", ok: has("NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL"), nivel: "recomendado",
