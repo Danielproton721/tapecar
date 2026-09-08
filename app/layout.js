@@ -1,5 +1,5 @@
 export const metadata = {
-  metadataBase: new URL("https://www.tapecar.shop"),
+  metadataBase: new URL("https://www.rodalux.com"),
   title: "RodaLux | Tapetes Automotivos Sob Medida",
   description:
     "Tapetes automotivos tipo bandeja 3D, cortados nas medidas exatas do seu carro. Borda elevada que segura agua e barro. Envio para todo o Brasil.",
@@ -12,7 +12,7 @@ export const metadata = {
     siteName: "RodaLux",
     title: "RodaLux | Tapetes Automotivos Sob Medida",
     description: "Bandeja 3D com borda elevada, cortada para o seu modelo.",
-    url: "https://www.tapecar.shop/tapete-bandeja",
+    url: "https://www.rodalux.com/tapete-bandeja",
     images: ["/images/socio-hero.webp"],
   },
   other: { "format-detection": "telephone=no,date=no,address=no,email=no,url=no" },

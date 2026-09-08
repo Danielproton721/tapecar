@@ -41,7 +41,7 @@ export async function POST(req) {
   const origin =
     process.env.SITE_URL ||
     req.headers.get("origin") ||
-    `https://${req.headers.get("host") || "tapecar.shop"}`;
+    `https://${req.headers.get("host") || "rodalux.com"}`;
 
   // ---- monta o corpo no formato da Beehive ----
   const body = {
@@ -65,8 +65,8 @@ export async function POST(req) {
       order_id: String(p.order_id || ""),
       checkout_url: `${origin}/checkout`,
       shop_url: origin,
-      // extras guardados pro webhook montar o pedido da RastroCode no PIX
-      // (o webhook da Beehive não traz telefone nem endereço nativamente):
+      // extras guardados pro /api/order/finalize montar o pedido da RastroCode
+      // (a transação da Beehive não traz telefone nem endereço nativamente):
       customer_phone: onlyDigits(c.phone),
       addr_street: c.address?.street || "",
       addr_number: c.address?.number || "",
