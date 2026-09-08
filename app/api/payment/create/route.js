@@ -93,9 +93,15 @@ export async function POST(req) {
   const { ok, status, data } = await createBeehiveTransaction(body);
 
   if (!ok) {
-    // repassa a mensagem da Beehive pro front (ele já sabe exibir data.error)
+    // loga a resposta CRUA da Beehive pra diagnóstico (Vercel → Logs)
+    console.error("[beehive] transação recusada", status, JSON.stringify(data));
+    const detalhe =
+      data?.message ||
+      (data?.error && (data.error.message || JSON.stringify(data.error))) ||
+      (data?.details && JSON.stringify(data.details)) ||
+      `Erro ao processar pagamento (${status})`;
     return json(
-      { error: data?.message || `Erro ao processar pagamento (${status})`, status },
+      { error: detalhe, status, beehive: data },
       status >= 400 && status < 600 ? status : 502
     );
   }
