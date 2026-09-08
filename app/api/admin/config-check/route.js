@@ -23,10 +23,6 @@ export async function GET(req) {
       dica: "ID AW- do Google Ads. Carrega o gtag no site pra rastreio e remarketing." },
     { grupo: "Marketing", label: "Google Ads — label de conversão (NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL)", ok: has("NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL"), nivel: "recomendado",
       dica: "Rótulo da conversão de compra. Sem ele a venda não é contada como conversão no Google Ads." },
-    { grupo: "Opcional", label: "Gateway (PAYMENT_GATEWAY)", ok: has("PAYMENT_GATEWAY"), nivel: "opcional",
-      dica: "Padrão: beehive. Só mude se trocar de gateway." },
-    { grupo: "Opcional", label: "Ambiente (PAYMENT_ENV)", ok: has("PAYMENT_ENV"), nivel: "opcional",
-      dica: "Padrão: production. Use 'sandbox' pra testar sem cobrar de verdade." },
   ];
 
   const faltamObrig = itens.filter((i) => i.nivel === "obrigatorio" && !i.ok).length;

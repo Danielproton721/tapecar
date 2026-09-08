@@ -24,7 +24,7 @@ function ts(t) {
 }
 
 export async function GET() {
-  const gateway = process.env.PAYMENT_GATEWAY || "beehive";
+  const gateway = "beehive";
 
   if (!process.env.PAYMENT_SECRET_KEY) {
     return Response.json({

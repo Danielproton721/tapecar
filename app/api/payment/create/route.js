@@ -10,12 +10,9 @@ export const dynamic = "force-dynamic";
  *   front  ->  Beehive (TransactionCreateRequest)
  *   Beehive -> front  (pixCode/transactionId/status que o checkout.js lê)
  *
- * As chaves ficam em env vars (vazias por padrão — o Daniel preenche na Vercel):
+ * Env vars usadas:
  *   PAYMENT_SECRET_KEY  chave secreta da Beehive (Basic auth, só no servidor)
- *   PAYMENT_ENV         "production" (padrão) ou "sandbox"
  *   SITE_URL            domínio da loja (pro metadata; cai no host do request)
- *   PAYMENT_PROVIDER    nome curto da loja no metadata (padrão "rodalux")
- *   PAYMENT_WEBHOOK_URL opcional; se setada, vira o postbackUrl da transação
  */
 export async function POST(req) {
   const p = await req.json().catch(() => ({}));
@@ -63,7 +60,7 @@ export async function POST(req) {
       tangible: i.tangible !== false,
     })),
     metadata: {
-      provider: process.env.PAYMENT_PROVIDER || "rodalux",
+      provider: "rodalux",
       user_email: c.email,
       order_id: String(p.order_id || ""),
       checkout_url: `${origin}/checkout`,
