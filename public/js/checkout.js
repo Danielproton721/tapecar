@@ -358,7 +358,9 @@ function hydrateForm() {
     if (el.type === "checkbox") el.checked = Boolean(value);
     else el.value = value;
   });
-  if (state.form.paymentMethod === "BILLET") {
+  // Só existe PIX agora (cartão removido do checkout): qualquer método salvo num
+  // rascunho antigo (cartão, boleto) cai em PIX pra ninguém ficar preso.
+  if (state.form.paymentMethod && state.form.paymentMethod !== "PIX") {
     state.form.paymentMethod = "PIX";
   }
   if (state.form.paymentMethod) {
